@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ravenna — Aufstieg, Blüte und Niedergang</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8D5A3;
+    --gold-bg: #F5EDD8;
+    --mosaic-blue: #1B3A6B;
+    --mosaic-deep: #0D1F3C;
+    --terracotta: #A85C3A;
+    --cream: #F8F3EA;
+    --text: #2A1F0E;
+    --text-light: #6B5740;
+    --divider: #DDD0B8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--mosaic-deep);
+    color: var(--cream);
+    padding: 2.8rem 2rem 2.2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 15% 60%, rgba(201,168,76,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 20%, rgba(27,58,107,0.5) 0%, transparent 50%);
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 11px, rgba(201,168,76,0.04) 12px),
+      repeating-linear-gradient(90deg, transparent, transparent 11px, rgba(201,168,76,0.04) 12px);
+    pointer-events: none;
+  }
+
+  header .inner {
+    position: relative;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  header .eyebrow {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.7rem;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.4rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: #fff;
+  }
+
+  header h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+    display: block;
+    font-size: 1.4rem;
+    margin-top: 0.2rem;
+  }
+
+  header .subtitle {
+    color: rgba(248,243,234,0.65);
+    font-size: 0.88rem;
+    margin-top: 0.9rem;
+    font-weight: 300;
+  }
+
+  header .meta-pills {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    margin-top: 1.3rem;
+  }
+
+  header .pill {
+    background: rgba(201,168,76,0.15);
+    border: 1px solid rgba(201,168,76,0.3);
+    color: var(--gold-light);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.7rem;
+    border-radius: 20px;
+  }
+
+  /* TIMELINE NAVIGATION BAR */
+  .era-bar {
+    background: var(--mosaic-blue);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .era-item {
+    padding: 0.75rem 1.4rem;
+    text-align: center;
+    border-right: 1px solid rgba(201,168,76,0.2);
+    cursor: default;
+  }
+
+  .era-item:last-child { border-right: none; }
+
+  .era-date {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .era-label {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(248,243,234,0.55);
+    margin-top: 0.1rem;
+  }
+
+  /* MAIN */
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 3rem;
+  }
+
+  /* CHAPTER */
+  .chapter {
+    margin-bottom: 3.5rem;
+  }
+
+  .chapter-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--divider);
+  }
+
+  .chapter-num {
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-top: 0.2rem;
+  }
+
+  .chapter-num.aufstieg  { background: var(--terracotta); color: white; }
+  .chapter-num.bluete    { background: var(--gold); color: var(--mosaic-deep); }
+  .chapter-num.niedergang { background: var(--mosaic-blue); color: var(--gold-light); }
+
+  .chapter-meta { flex: 1; }
+
+  .chapter-era {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.2rem;
+  }
+
+  .chapter-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--mosaic-blue);
+    line-height: 1.2;
+  }
+
+  .chapter-subtitle {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    font-style: italic;
+    margin-top: 0.2rem;
+  }
+
+  /* PROSE */
+  .prose p {
+    font-size: 0.92rem;
+    line-height: 1.8;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+
+  .prose p:last-child { margin-bottom: 0; }
+
+  .prose strong {
+    color: var(--mosaic-blue);
+    font-weight: 600;
+  }
+
+  /* PORTRAIT CARDS */
+  .portrait-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  @media (max-width: 500px) {
+    .portrait-grid { grid-template-columns: 1fr; }
+  }
+
+  .portrait-card {
+    background: var(--mosaic-deep);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+.portrait-body {
+    padding: 0.9rem 1rem;
+  }
+
+  .portrait-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--gold-light);
+    font-weight: 700;
+    margin-bottom: 0.15rem;
+  }
+
+  .portrait-dates {
+    font-size: 0.7rem;
+    color: var(--gold);
+    letter-spacing: 0.08em;
+    margin-bottom: 0.5rem;
+  }
+
+  .portrait-desc {
+    font-size: 0.8rem;
+    color: rgba(248,243,234,0.75);
+    line-height: 1.6;
+  }
+
+  /* HIGHLIGHT QUOTE */
+  .highlight {
+    background: var(--gold-bg);
+    border-left: 3px solid var(--gold);
+    padding: 1rem 1.2rem;
+    border-radius: 0 6px 6px 0;
+    margin: 1.2rem 0;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .highlight cite {
+    display: block;
+    font-size: 0.75rem;
+    font-style: normal;
+    color: var(--text-light);
+    margin-top: 0.4rem;
+  }
+
+  /* DARK BLOCK */
+  .dark-block {
+    background: var(--mosaic-deep);
+    color: var(--cream);
+    border-radius: 8px;
+    padding: 1.6rem 1.8rem;
+    margin: 1.5rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .dark-block::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.1), transparent 70%);
+  }
+
+  .dark-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    margin-bottom: 0.7rem;
+    position: relative;
+  }
+
+  .dark-block p {
+    font-size: 0.87rem;
+    color: rgba(248,243,234,0.82);
+    line-height: 1.75;
+    position: relative;
+    margin-bottom: 0.6rem;
+  }
+
+  .dark-block p:last-child { margin-bottom: 0; }
+
+  .dark-block strong { color: var(--gold-light); }
+
+  /* TIMELINE STRIP */
+  .timeline-strip {
+    position: relative;
+    padding-left: 2rem;
+    margin: 1.5rem 0;
+  }
+
+  .timeline-strip::before {
+    content: '';
+    position: absolute;
+    left: 0.55rem;
+    top: 0.5rem;
+    bottom: 0.5rem;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), var(--divider));
+  }
+
+  .tl-item {
+    position: relative;
+    margin-bottom: 1.1rem;
+    padding-left: 0.5rem;
+  }
+
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -1.55rem;
+    top: 0.45rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    border: 2px solid var(--cream);
+  }
+
+  .tl-date {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .tl-text {
+    font-size: 0.87rem;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .tl-text strong { color: var(--mosaic-blue); }
+
+  /* SECTION IMAGE */
+/* SECTION HEAD */
+  .sec-head {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--mosaic-blue);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 1.6rem 0 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .sec-head::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--divider);
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 1.8rem;
+    font-size: 0.72rem;
+    color: var(--text-light);
+    border-top: 1px solid var(--divider);
+    letter-spacing: 0.05em;
+  }
+
+
+  .section-img {
+    width: 100%;
+    border-radius: 8px;
+    margin: 1.2rem 0 0.3rem;
+    display: block;
+    aspect-ratio: 16/7;
+    object-fit: cover;
+  }
+  .img-cap {
+    font-size: 0.72rem;
+    color: #6B5740;
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+  .portrait-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+    border-radius: 6px 6px 0 0;
+    margin-bottom: 0;
+  }
+
+  /* LINK BACK */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    text-decoration: none;
+    margin-bottom: 2rem;
+    border-bottom: 1px dashed var(--divider);
+    padding-bottom: 0.3rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <div class="eyebrow">Ravenna · Hintergrund · Geschichte</div>
+    <h1>Ravenna
+      <em>Aufstieg, Blüte und Niedergang</em>
+    </h1>
+    <p class="subtitle">350 Jahre Weltgeschichte auf engstem Raum · 402–751 n. Chr.</p>
+    <div class="meta-pills">
+      <span class="pill">🏛 Weströmisches Reich</span>
+      <span class="pill">⚔ Ostgoten</span>
+      <span class="pill">✦ Byzantinisches Exarchat</span>
+    </div>
+  </div>
+</header>
+
+<!-- ERA BAR -->
+<div class="era-bar">
+  <div class="era-item">
+    <span class="era-date">vor 402</span>
+    <span class="era-label">Römische Provinz</span>
+  </div>
+  <div class="era-item">
+    <span class="era-date">402–476</span>
+    <span class="era-label">Weström. Residenz</span>
+  </div>
+  <div class="era-item">
+    <span class="era-date">493–540</span>
+    <span class="era-label">Theoderich / Goten</span>
+  </div>
+  <div class="era-item">
+    <span class="era-date">540–751</span>
+    <span class="era-label">Byzantinisch</span>
+  </div>
+  <div class="era-item">
+    <span class="era-date">751</span>
+    <span class="era-label">Niedergang</span>
+  </div>
+</div>
+
+<main>
+  <a href="index.html" style="display:inline-flex;align-items:center;gap:0.4rem;font-size:0.8rem;color:#6B5740;text-decoration:none;margin-bottom:1.8rem;border-bottom:1px dashed #DDD0B8;padding-bottom:0.3rem;">← Zurück zur Übersicht</a>
+
+
+  <!-- ══════════════════════════════════════════
+       KAPITEL 1: AUFSTIEG
+  ══════════════════════════════════════════ -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <div class="chapter-num aufstieg">I</div>
+      <div class="chapter-meta">
+        <div class="chapter-era">Aufstieg · 27 v. Chr. – 402 n. Chr.</div>
+        <div class="chapter-title">Von der Sumpfstadt zur Kaiserresidenz</div>
+        <div class="chapter-subtitle">Wie Sümpfe eine Stadt zur Hauptstadt machten</div>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>Ravenna war nie eine bedeutende Stadt — und genau das wurde sein größter Vorteil. Kein natürlicher Verkehrsknotenpunkt, keine reiche Handelsroute, kein strategischer Bergpass. Was es hatte, waren Sümpfe und die Adria.</p>
+
+      <p>Augustus erkannte den militärischen Wert: <strong>27 v. Chr. ließ er bei Ravenna den Kriegshafen Classis anlegen</strong> — einen der größten des Imperiums, mit Platz für 250 Kriegsschiffe, Sicherung der gesamten östlichen Adriaküste. Die Stadt selbst blieb bescheiden. Ein Provinzort mit Militärhafen, mehr nicht.</p>
+
+      <div class="sec-head">Rom, dann Mailand — warum nicht mehr Rom?</div>
+
+      <p>Das Weströmische Reich hatte Rom schon lange als Regierungszentrum aufgegeben. Die Kaiser mussten beweglich sein — Rheingrenze, Donaugrenze, Persien. <strong>Mailand lag zentral, nah an den Alpenpässen, gut erreichbar für schnelle Truppenbewegungen.</strong> Diocletian hatte dieses System etabliert, Konstantin fortgeführt. Rom war Symbolhauptstadt, Mailand war die echte Schaltzentrale des Westreichs.</p>
+
+      <p>Als dann im Winter 401/402 n. Chr. Alarich mit seinen Westgoten die Alpen überquerte und direkt auf Mailand zumarschierte, wurde die Residenzstadt zur Falle. Kaiser Honorius — 18 Jahre alt, schwach, faktisch regiert von seinem General Stilicho — floh. Nicht nach Rom, das war zu weit und zu offen. Er floh nach Ravenna.</p>
+    </div>
+
+    <div class="highlight">
+      Die Logik war militärisch schlicht: Ravenna lag inmitten von Sümpfen und Lagunen. Wer keine Schiffe hatte, kam nicht hinein. Alarich belagerte die Stadt 408 n. Chr. — und scheiterte. Er zog weiter, plünderte Rom 410 n. Chr. — ein Schock für die gesamte antike Welt — aber Ravenna fiel nicht.
+    </div>
+
+    <div class="prose">
+      <p><strong>Honorius blieb. Mit ihm die Regierung des Westreichs.</strong> Eine Notlösung wurde zur Hauptstadtentscheidung, die 350 Jahre Folgen haben sollte.</p>
+    </div>
+
+    <img class="section-img" src="img/apollinare_nuovo_palast_theoderich.jpg" alt="Palast Theoderichs — PALATIUM Mosaik in Sant'Apollinare Nuovo">
+    <p class="img-cap">Der Palast Theoderichs — PALATIUM-Inschrift in Sant'Apollinare Nuovo, seiner Palastkirche. Die Vorhänge verdecken die herausgemeißelten arianischen Hofbeamten.</p>
+
+</div><!-- /chapter 1 -->
+
+
+  <!-- ══════════════════════════════════════════
+       KAPITEL 2: ERSTE BLÜTE — GALLA PLACIDIA
+  ══════════════════════════════════════════ -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <div class="chapter-num bluete">II</div>
+      <div class="chapter-meta">
+        <div class="chapter-era">Erste Blüte · 425–450 n. Chr.</div>
+        <div class="chapter-title">Galla Placidia</div>
+        <div class="chapter-subtitle">Eine Frau regiert das sterbende Westreich</div>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>Honorius war keine starke Persönlichkeit. Seine Halbschwester war es. <strong>Galla Placidia</strong> — Tochter des großen Theodosius I., Schwester des schwachen Honorius — führte ein Leben, das selbst für die turbulente Spätantike außergewöhnlich war.</p>
+    </div>
+
+    <div class="portrait-grid">
+      <div class="portrait-card">
+        <img class="portrait-img" src="img/galla_placidia_kreuzgewoelbe.jpg" alt="Mausoleum der Galla Placidia — Sternenhimmel-Mosaik">
+        <div class="portrait-body">
+          <div class="portrait-name">Galla Placidia</div>
+          <div class="portrait-dates">ca. 388 – 450 n. Chr.</div>
+          <div class="portrait-desc">Tochter Theodosius' I., Geiselin der Westgoten, Königin der Goten, Kaiserin des Westreichs, Regentin für ihren Sohn. Eine der mächtigsten Frauen der Spätantike.</div>
+        </div>
+      </div>
+      <div class="portrait-card">
+        <div class="portrait-body">
+          <div class="portrait-name">Kaiser Honorius</div>
+          <div class="portrait-dates">384 – 423 n. Chr.</div>
+          <div class="portrait-desc">Weströmischer Kaiser, der Ravenna zur Residenz machte — weniger aus Strategie als aus Angst. Unter seiner Herrschaft fiel Rom zum ersten Mal seit 800 Jahren einem Feind zum Opfer.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>Ihre Biographie: Bei der Plünderung Roms 410 n. Chr. als Geisel von den Westgoten genommen. Heirat mit deren König Ataulf. Rückgabe nach seinem Tod. Zwangsheirat mit dem römischen General Constantius III. Zwei Kinder, darunter Valentinian III. Tod des Mannes. Exil in Konstantinopel. Rückkehr nach Ravenna.</p>
+
+      <p>Als ihr Bruder Honorius 423 n. Chr. starb und ihr Sohn Valentinian III. den Thron bestieg — er war sechs Jahre alt — <strong>regierte Galla Placidia als Kaiserin-Regentin das Westreich</strong>. Über 20 Jahre lang, von Ravenna aus.</p>
+
+      <p>Sie baute. Das Mausoleum, das du in Ravenna gesehen hast, entstand um 426 n. Chr. — als sie auf dem Höhepunkt ihrer Macht war und gleichzeitig wusste, dass das Reich um sie herum auseinanderfiel. Die Hunnen unter Attila bedrohten die Grenzen, die Vandalen hatten Nordafrika abgetrennt, die Westgoten kontrollierten Südgallien.</p>
+    </div>
+
+    <div class="dark-block">
+      <h3>Was vom Reich übrig blieb</h3>
+      <p>Als Galla Placidia 450 n. Chr. starb, hatte das Westreich noch 26 Jahre. Ihr Sohn Valentinian III. wurde 455 n. Chr. ermordet. Die Vandalen plünderten Rom im selben Jahr. Die letzten Jahrzehnte waren eine Abfolge von Usurpatoren, Heermeistern germanischer Herkunft und politischem Chaos.</p>
+      <p><strong>476 n. Chr.</strong> setzte der germanische Heerführer Odoaker den letzten Kaiser Romulus Augustulus ab. Das Weströmische Reich endete — nicht mit einer großen Schlacht, sondern mit einer Verwaltungsentscheidung. Ravenna blieb Residenzstadt. Jetzt unter Odoaker.</p>
+    </div>
+
+  </div><!-- /chapter 2 -->
+
+
+  <!-- ══════════════════════════════════════════
+       KAPITEL 3: THEODERICH
+  ══════════════════════════════════════════ -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <div class="chapter-num bluete">III</div>
+      <div class="chapter-meta">
+        <div class="chapter-era">Zweite Blüte · 493–526 n. Chr.</div>
+        <div class="chapter-title">Theoderich der Große</div>
+        <div class="chapter-subtitle">Der Ostgote, der Rom wiederbeleben wollte — und zur Sagengestalt wurde</div>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>493 n. Chr. kam Theoderich. Beim Friedensbankett mit Odoaker tötete er ihn persönlich — mit eigener Hand, einem Schwert, das er Odoaker diagonal durch den Körper trieb. Dann regierte er über dreißig Jahre lang das stabilste und prosperierendste Reich, das der Westen seit Jahrzehnten gesehen hatte.</p>
+
+      <p>Theoderich war Ostgote — aber in Konstantinopel aufgewachsen, als Geisel am oströmischen Hof. <strong>Er sprach Latein, dachte römisch, regierte im Auftrag des oströmischen Kaisers — und war dabei vollständig unabhängig.</strong> Ein Widerspruch, der sein ganzes Leben prägte.</p>
+    </div>
+
+    <div class="portrait-grid">
+      <div class="portrait-card">
+        <div class="portrait-body">
+          <div class="portrait-name">Theoderich der Große</div>
+          <div class="portrait-dates">451/454 – 526 n. Chr.</div>
+          <div class="portrait-desc">Ostgotenkönig, in Konstantinopel erzogen. Regierte Italien 33 Jahre lang mit bemerkenswerter Toleranz. In der germanischen Heldensage überlebt als Dietrich von Bern.</div>
+        </div>
+      </div>
+      <div class="portrait-card">
+        <div class="portrait-body">
+          <div class="portrait-name">Boethius</div>
+          <div class="portrait-dates">ca. 477 – 524 n. Chr.</div>
+          <div class="portrait-desc">Theoderichs höchster Beamter, Philosoph, Übersetzer des Aristoteles. Schrieb in der Todeszelle die "Consolatio Philosophiae" — eines der meistgelesenen Bücher des Mittelalters. Von Theoderich hingerichtet.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="dark-block">
+      <h3>Dietrich von Bern — Theoderich als Sagengestalt</h3>
+      <p>Die germanischen Heldenlieder haben aus Theoderich eine völlig andere Figur gemacht. <strong>Bern ist Verona</strong> — im Mittelhochdeutschen so genannt, eine von Theoderichs wichtigsten Städten. Im Nibelungenlied, in der Thidrekssaga, im Hildebrandslied taucht er als Dietrich auf: ein ewiger Kämpfer im Exil, verfolgt von Feinden, ruhelos.</p>
+      <p>Der historische Theoderich und die Sagengestalt haben kaum noch etwas gemein. Der echte Theoderich war Staatsmann, Mäzen, Verwalter. Die Volksüberlieferung hat aus dem Politiker einen Recken gemacht — typisch für das frühe Mittelalter: Was bleibt, sind Schwerter und Schlachten, nicht Verwaltungsreformen.</p>
+    </div>
+
+    <div class="prose">
+      <p>Theoderich war Arianer — seine gotischen Untertanen ebenfalls. Die römisch-katholische Mehrheit ließ er gewähren. <strong>Zwei Religionen, eine Verwaltung, dreißig Jahre Frieden</strong> — in der Spätantike eine Ausnahmeerscheinung.</p>
+
+      <p>Er baute: Sant'Apollinare Nuovo als seine Palastkirche, ein arianisches Baptisterium, Paläste, Aquädukte. Sein Grabmal — das Mausoleo di Teodorico — ist ein einzigartiger Rundbau aus riesigen istrischen Kalksteinblöcken, ohne Mörtel gefügt. Die Deckplatte ein einziger Stein, 230 Tonnen schwer — wie er transportiert und gehoben wurde, ist bis heute nicht vollständig geklärt.</p>
+
+      <p>Am Ende seines Lebens wurde er misstrauisch, ließ Boethius und dessen Schwiegervater Symmachus hinrichten — die klügsten römischen Köpfe seiner Verwaltung. Er starb 526 n. Chr., kurz nach der Hinrichtung des Papstes Johannes I., den er ebenfalls gefangen gesetzt hatte. Im selben Jahr begann der Bau von San Vitale.</p>
+    </div>
+
+  </div><!-- /chapter 3 -->
+
+
+  <!-- ══════════════════════════════════════════
+       KAPITEL 4: JUSTINIAN & THEODORA
+  ══════════════════════════════════════════ -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <div class="chapter-num bluete">IV</div>
+      <div class="chapter-meta">
+        <div class="chapter-era">Dritte Blüte · 540–565 n. Chr.</div>
+        <div class="chapter-title">Justinian &amp; Theodora</div>
+        <div class="chapter-subtitle">Die, die nie kamen — und trotzdem in Gold verewigt sind</div>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>540 n. Chr. — General Belisarius erobert Ravenna für Konstantinopel zurück. Die Ostgoten kapitulieren. Ravenna wird byzantinisches Exarchat, Verwaltungszentrum der neu zurückeroberten westlichen Provinzen.</p>
+
+      <p>Der Mann dahinter sitzt 1.500 km entfernt: <strong>Justinian I.</strong>, Kaiser in Konstantinopel. Bauernsohn aus dem heutigen Nordmazedonien, vom Onkel Justin adoptiert und zur Macht gebracht, seit 527 n. Chr. Alleinherrscher. Sein Programm: das gesamte Römische Reich wiederherstellen. Nordafrika, Italia, Teile Spaniens — er hat es fast geschafft.</p>
+    </div>
+
+    <div class="portrait-grid">
+      <div class="portrait-card">
+        <img class="portrait-img" src="img/san_vitale_justinian_detail.jpg" alt="Justinian I. — Mosaik in der Basilica San Vitale, Ravenna">
+        <div class="portrait-body">
+          <div class="portrait-name">Justinian I.</div>
+          <div class="portrait-dates">482 – 565 n. Chr. · Kaiser ab 527</div>
+          <div class="portrait-desc">Ließ das Corpus Juris Civilis kodifizieren, die Hagia Sophia bauen, das Weströmische Reich militärisch wiedergewinnen. Nie in Ravenna — trotzdem im Altarraum von San Vitale verewigt.</div>
+        </div>
+      </div>
+      <div class="portrait-card">
+        <img class="portrait-img" src="img/san_vitale_theodora_detail.jpg" alt="Kaiserin Theodora — Mosaik in der Basilica San Vitale, Ravenna">
+        <div class="portrait-body">
+          <div class="portrait-name">Theodora</div>
+          <div class="portrait-dates">ca. 497 – 548 n. Chr. · Mitkaiserin</div>
+          <div class="portrait-desc">Tochter eines Zirkuswärters, Schauspielerin, Mitkaiserin mit vollem Titel. Starb 548 n. Chr. — kurz nach der Einweihung von San Vitale. Das Mosaik dort ist eines der bedeutendsten Frauenportraits der Antike.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="highlight">
+      „Wer einmal geboren wurde, muss sterben. Aber wer einmal Kaiser war, kann die Verbannung nicht ertragen. Möge ich niemals den Purpur ablegen. Für mich soll gelten: das Purpurgewand ist ein schönes Leichentuch."
+      <cite>— Theodora, 532 n. Chr., beim Nika-Aufstand · überliefert von Prokop</cite>
+    </div>
+
+    <div class="prose">
+      <p>Der Nika-Aufstand 532 n. Chr.: Konstantinopel brennt, Justinian erwägt die Flucht. Theodora — Tochter eines Zirkuswärters, aufgestiegen zur Mitkaiserin — hält ihn zurück. Belisarius niederschlug den Aufstand, Zehntausende starben im Hippodrom. Das Reich blieb stabil. <strong>Ob sie es wirklich so sagte — egal. Dass man es ihr zutraute und überlieferte, sagt alles.</strong></p>
+
+      <p>Die Mosaiken in San Vitale mit Justinian und Theodora wurden nach der Rückeroberung eingefügt — eine politische Aussage in Gold: <em>Das hier gehört jetzt uns. Wir waren schon immer hier.</em> Beide stehen im Altarraum, als wären sie beim Gottesdienst persönlich anwesend. Propaganda und Frömmigkeit, untrennbar.</p>
+    </div>
+
+    <div class="timeline-strip">
+      <div class="tl-item">
+        <div class="tl-date">526 n. Chr.</div>
+        <div class="tl-text">Baubeginn San Vitale · Theoderich stirbt im selben Jahr</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">532 n. Chr.</div>
+        <div class="tl-text"><strong>Nika-Aufstand</strong> in Konstantinopel · Theodora hält Justinian vom Fliehen ab</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">533 n. Chr.</div>
+        <div class="tl-text">Belisarius erobert Nordafrika von den Vandalen zurück</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">540 n. Chr.</div>
+        <div class="tl-text"><strong>Belisarius nimmt Ravenna ein</strong> · Ende der Ostgotenherrschaft · Byzantinisches Exarchat</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">541 n. Chr.</div>
+        <div class="tl-text">Justinianische Pest trifft das Mittelmeer · möglicherweise ein Drittel der Bevölkerung stirbt</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">547/548 n. Chr.</div>
+        <div class="tl-text"><strong>San Vitale eingeweiht</strong> · Theodora stirbt kurz danach · wahrscheinlich Krebs</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">565 n. Chr.</div>
+        <div class="tl-text">Justinian stirbt · 17 Jahre nach Theodora · er regierte bis zuletzt</div>
+      </div>
+    </div>
+
+  </div><!-- /chapter 4 -->
+
+
+  <!-- ══════════════════════════════════════════
+       KAPITEL 5: NIEDERGANG
+  ══════════════════════════════════════════ -->
+  <div class="chapter">
+    <div class="chapter-header">
+      <div class="chapter-num niedergang">V</div>
+      <div class="chapter-meta">
+        <div class="chapter-era">Niedergang · 568–751 n. Chr.</div>
+        <div class="chapter-title">Das Ende der Sonderrolle</div>
+        <div class="chapter-subtitle">Wie eine Kaiserresidenz zur Provinzstadt wurde — und ihre Schätze behielt</div>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p>Drei Jahre nach Justinians Tod fiel 568 n. Chr. ein neues germanisches Volk in Italien ein: die <strong>Langobarden</strong>. Sie kamen schnell und gründlich — Nord- und Mittelitalien fiel innerhalb weniger Jahre. Aber Ravenna hielt. Die Sümpfe, die die Stadt 166 Jahre zuvor zur Kaiserresidenz gemacht hatten, schützten sie erneut.</p>
+
+      <p>Fast zwei Jahrhunderte lang existierte Ravenna als byzantinische Enklave — umgeben von langobardischem Territorium, verbunden mit Konstantinopel nur über das Meer. Der Exarch, Justinians Nachfolger als Statthalter, residierte weiter in der Stadt. Es war eine eigentümliche Existenz: <strong>Hauptstadt eines Territoriums, das von allen Seiten eingeengt wurde, politisch immer bedeutungsloser, kulturell immer noch leuchtend.</strong></p>
+
+      <p>Die byzantinische Verwaltung baute noch. Sant'Apollinare in Classe, 6 km außerhalb der Stadt, wurde 549 n. Chr. eingeweiht — mit einem der großartigsten Apsismosaike überhaupt. Die Energie der Justinianischen Ära wirkte nach, auch als die politische Substanz dahinter schwand.</p>
+    </div>
+
+    <div class="dark-block">
+      <h3>751 n. Chr. — Das Ende</h3>
+      <p>Der Langobardenkönig <strong>Aistulf</strong> nahm Ravenna ein. Der letzte byzantinische Exarch floh. 350 Jahre Sonderrolle endeten ohne dramatische letzte Schlacht — eine Stadt ergab sich, eine Verwaltungsepoche schloss.</p>
+      <p>Was folgte, war Bedeutungslosigkeit. Keine Residenz mehr, kein Verwaltungszentrum, keine reichen Stifter, keine ehrgeizigen Bischöfe mit kaiserlichen Budgets. Ravenna versank in die norditalienische Provinz.</p>
+      <p><strong>Und bewahrte damit seine Schätze.</strong> Was danach kam, war arm genug, um die Mosaiken zu lassen, wo sie waren. Kein Umbau, kein Übertünchen, keine neue Mode die das Alte beseitigte. Die Armut nach dem Niedergang wurde zur Konservierung.</p>
+    </div>
+
+    <div class="prose">
+      <p>Dante Alighieri starb 1321 n. Chr. in Ravenna — im Exil aus Florenz, von der Stadt aufgenommen, als er nirgendwo sonst willkommen war. Dass der größte italienische Dichter seine letzten Jahre und seine Ruhe in dieser vergessenen Stadt fand, hat eine stille Logik: <strong>Ravenna hat immer das bewahrt, was anderswo unterzugehen drohte.</strong></p>
+    </div>
+
+    <img class="section-img" src="img/apollinare_nuovo_maertyrer_detail.jpg" alt="Märtyrerprozession in Sant'Apollinare Nuovo — Theoderichs Heilige">
+    <p class="img-cap">Die Märtyrerprozession in Theoderichs Palastkirche — Vitalis, Gervasius, Protasius: die Ravennater Stadtheiligen, verewigt im arianischen Bildprogramm.</p>
+
+    <div class="highlight">
+      Was zu sehen ist, hat 1.500 Jahre überlebt — weil Ravenna danach schlicht unwichtig genug war, um verschont zu bleiben. Die Mosaiken sind der sichtbare Abdruck jenes kurzen Fensters, in dem Antike und Mittelalter gleichzeitig gültig waren.
+    </div>
+
+  </div><!-- /chapter 5 -->
+
+</main>
+
+<footer>
+  Ravenna · Geschichte · Quellen: Prokop, Cassiodor, Jordanes
+</footer>
+
+</body>
+</html>
