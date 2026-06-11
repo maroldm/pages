@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ravenna — Der Rundgang</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8D5A3;
+    --gold-bg: #F5EDD8;
+    --mosaic-blue: #1B3A6B;
+    --mosaic-deep: #0D1F3C;
+    --terracotta: #A85C3A;
+    --verde: #3A6B3A;
+    --cream: #F8F3EA;
+    --text: #2A1F0E;
+    --text-light: #6B5740;
+    --divider: #DDD0B8;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--mosaic-deep);
+    color: var(--cream);
+    padding: 2.8rem 1.8rem 2.2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 10% 70%, rgba(201,168,76,0.18) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 15%, rgba(27,58,107,0.45) 0%, transparent 50%);
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 11px, rgba(201,168,76,0.03) 12px),
+      repeating-linear-gradient(90deg, transparent, transparent 11px, rgba(201,168,76,0.03) 12px);
+    pointer-events: none;
+  }
+
+  header .inner {
+    position: relative;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  header .eyebrow {
+    font-size: 0.67rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.3rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: #fff;
+  }
+
+  header h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+    display: block;
+    font-size: 1.2rem;
+    margin-top: 0.25rem;
+  }
+
+  header .subtitle {
+    color: rgba(248,243,234,0.6);
+    font-size: 0.85rem;
+    margin-top: 0.8rem;
+    font-weight: 300;
+  }
+
+  header .pills {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1.1rem;
+  }
+
+  header .pill {
+    background: rgba(201,168,76,0.14);
+    border: 1px solid rgba(201,168,76,0.28);
+    color: var(--gold-light);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.22rem 0.65rem;
+    border-radius: 20px;
+  }
+
+  /* ROUTE BAR */
+  .route-bar {
+    background: var(--mosaic-blue);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .rb-item {
+    padding: 0.7rem 1.1rem;
+    text-align: center;
+    border-right: 1px solid rgba(201,168,76,0.2);
+  }
+
+  .rb-item:last-child { border-right: none; }
+
+  .rb-num {
+    display: block;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .rb-label {
+    display: block;
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(248,243,234,0.5);
+    margin-top: 0.1rem;
+  }
+
+  /* MAIN */
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem 1.4rem 3rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    text-decoration: none;
+    margin-bottom: 2rem;
+    border-bottom: 1px dashed var(--divider);
+    padding-bottom: 0.3rem;
+  }
+
+  /* SECTION HEAD */
+  .sec-head {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--mosaic-blue);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 2rem 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .sec-head::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--divider);
+  }
+
+  /* STATION HEADER */
+  .station {
+    margin-bottom: 3rem;
+  }
+
+  .station-header {
+    border-radius: 10px 10px 0 0;
+    padding: 1.2rem 1.4rem 1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .station-header.blue  { background: var(--mosaic-blue); }
+  .station-header.terra { background: var(--terracotta); }
+  .station-header.verde { background: var(--verde); }
+  .station-header.dark  { background: #3a3020; }
+  .station-header.next  { background: #4a3060; }
+
+  .st-num {
+    flex-shrink: 0;
+    width: 2.8rem;
+    height: 2.8rem;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+    margin-top: 0.1rem;
+  }
+
+  .st-meta { flex: 1; }
+
+  .st-time {
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    opacity: 0.85;
+    margin-bottom: 0.15rem;
+  }
+
+  .st-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1.2;
+  }
+
+  .st-sub {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.6);
+    margin-top: 0.15rem;
+  }
+
+  .st-tags {
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+    margin-top: 0.6rem;
+  }
+
+  .stag {
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.18rem 0.5rem;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.9);
+  }
+
+  /* STATION BODY */
+  .station-body {
+    background: white;
+    border-radius: 0 0 10px 10px;
+    border: 1px solid var(--divider);
+    border-top: none;
+    padding: 1.4rem;
+  }
+
+  .station-body p {
+    font-size: 0.88rem;
+    line-height: 1.78;
+    color: var(--text);
+    margin-bottom: 0.85rem;
+  }
+
+  .station-body p:last-child { margin-bottom: 0; }
+  .station-body strong { color: var(--mosaic-blue); font-weight: 600; }
+
+  /* PHOTO */
+  .photo {
+    width: 100%;
+    border-radius: 6px;
+    display: block;
+    margin: 1rem 0 0.3rem;
+    object-fit: cover;
+  }
+
+  .photo.hero   { aspect-ratio: 16/9; }
+  .photo.tall   { aspect-ratio: 3/4; }
+  .photo.square { aspect-ratio: 1/1; }
+  .photo.wide   { aspect-ratio: 21/9; }
+
+  .photo-cap {
+    font-size: 0.7rem;
+    color: var(--text-light);
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  /* PHOTO GRID */
+  .photo-grid {
+    display: grid;
+    gap: 0.6rem;
+    margin: 1rem 0;
+  }
+
+  .photo-grid.two   { grid-template-columns: 1fr 1fr; }
+  .photo-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+
+  @media (max-width: 480px) {
+    .photo-grid.three { grid-template-columns: 1fr 1fr; }
+  }
+
+  .photo-grid img {
+    width: 100%;
+    border-radius: 5px;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 4/3;
+  }
+
+  /* HIGHLIGHT */
+  .highlight {
+    background: var(--gold-bg);
+    border-left: 3px solid var(--gold);
+    padding: 0.85rem 1.1rem;
+    border-radius: 0 5px 5px 0;
+    margin: 1rem 0;
+    font-size: 0.86rem;
+    font-style: italic;
+    color: var(--text);
+    line-height: 1.72;
+  }
+
+  .highlight strong {
+    font-style: normal;
+    color: var(--mosaic-blue);
+    font-weight: 600;
+  }
+
+  /* DARK BLOCK */
+  .dark-block {
+    background: var(--mosaic-deep);
+    border-radius: 7px;
+    padding: 1.2rem 1.4rem;
+    margin: 1rem 0;
+  }
+
+  .dark-block h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.95rem;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+    font-style: italic;
+  }
+
+  .dark-block p {
+    font-size: 0.84rem;
+    color: rgba(248,243,234,0.82);
+    line-height: 1.72;
+    margin-bottom: 0.5rem;
+  }
+
+  .dark-block p:last-child { margin-bottom: 0; }
+  .dark-block strong { color: var(--gold-light); font-weight: 600; }
+
+  /* INFO ROW */
+  .info-row {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    padding-top: 0.85rem;
+    border-top: 1px dashed var(--divider);
+  }
+
+  .ichip {
+    background: var(--cream);
+    border: 1px solid var(--divider);
+    border-radius: 4px;
+    padding: 0.28rem 0.65rem;
+    font-size: 0.76rem;
+    color: var(--text-light);
+  }
+
+  .ichip strong { color: var(--text); font-weight: 600; }
+
+  /* OPTIONAL SECTION */
+  .optional-intro {
+    background: #2d1f4a;
+    color: var(--cream);
+    border-radius: 10px;
+    padding: 1.6rem 1.8rem;
+    margin: 2.5rem 0 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .optional-intro::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.12), transparent 70%);
+  }
+
+  .optional-intro h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--gold-light);
+    margin-bottom: 0.6rem;
+    font-style: italic;
+    position: relative;
+  }
+
+  .optional-intro p {
+    font-size: 0.86rem;
+    color: rgba(248,243,234,0.78);
+    line-height: 1.7;
+    position: relative;
+  }
+
+  /* OPTIONAL CARD */
+  .opt-card {
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  .opt-card-head {
+    background: #2d1f4a;
+    padding: 0.9rem 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .opt-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  .opt-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--gold-light);
+    font-weight: 700;
+  }
+
+  .opt-sub {
+    font-size: 0.75rem;
+    color: rgba(248,243,234,0.55);
+    margin-top: 0.1rem;
+  }
+
+  .opt-body {
+    background: white;
+    padding: 1rem 1.2rem;
+  }
+
+  .opt-body p {
+    font-size: 0.86rem;
+    line-height: 1.72;
+    color: var(--text);
+    margin-bottom: 0.6rem;
+  }
+
+  .opt-body p:last-child { margin-bottom: 0; }
+  .opt-body strong { color: var(--mosaic-blue); font-weight: 600; }
+
+  /* TICKET INFO */
+  .ticket-row {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.7rem;
+    padding-top: 0.7rem;
+    border-top: 1px dashed var(--divider);
+  }
+
+  .tchip {
+    background: var(--gold-bg);
+    border: 1px solid var(--gold-light);
+    border-radius: 4px;
+    padding: 0.22rem 0.6rem;
+    font-size: 0.74rem;
+    color: var(--text-light);
+  }
+
+  .tchip strong { color: var(--text); }
+
+  footer {
+    text-align: center;
+    padding: 1.6rem;
+    font-size: 0.7rem;
+    color: var(--text-light);
+    border-top: 1px solid var(--divider);
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <div class="eyebrow">Ravenna · Eigene Fotos · Reisedokumentation</div>
+    <h1>Der Ravenna-Rundgang
+      <em>Was wir gesehen haben — und was noch wartet</em>
+    </h1>
+    <p class="subtitle">Galla Placidia · San Vitale · Sant'Apollinare Nuovo · Für den nächsten Besuch</p>
+    <div class="pills">
+      <span class="pill">🎟 4-Stätten-Pass · 12,50 €</span>
+      <span class="pill">⏱ ca. 3 Std.</span>
+      <span class="pill">📍 ~2,5 km zu Fuß</span>
+      <span class="pill">🅿 Largo Giustiniano</span>
+    </div>
+  </div>
+</header>
+
+<div class="route-bar">
+  <div class="rb-item"><span class="rb-num">P</span><span class="rb-label">Parkplatz</span></div>
+  <div class="rb-item"><span class="rb-num">1</span><span class="rb-label">Galla Placidia</span></div>
+  <div class="rb-item"><span class="rb-num">2</span><span class="rb-label">San Vitale</span></div>
+  <div class="rb-item"><span class="rb-num">☕</span><span class="rb-label">Piazza Popolo</span></div>
+  <div class="rb-item"><span class="rb-num">3</span><span class="rb-label">S. Apollinare</span></div>
+  <div class="rb-item"><span class="rb-num">→</span><span class="rb-label">Nächste Reise</span></div>
+</div>
+
+<main>
+
+  <a href="index.html" class="back-link">← Zurück zur Übersicht</a>
+
+  <!-- ══════════════════════════════════════
+       PRAKTISCHES
+  ══════════════════════════════════════ -->
+  <div class="sec-head">Praktisches</div>
+
+  <div style="background:white;border:1px solid var(--divider);border-radius:8px;padding:1.1rem 1.4rem;margin-bottom:2rem;">
+    <p style="font-size:0.86rem;color:var(--text);line-height:1.72;margin-bottom:0.5rem;">
+      <strong>Parkplatz:</strong> Largo Giustiniano — 3 €/Tag, Kreditkarte, 2 Gehminuten zu den ersten beiden Stationen.
+    </p>
+    <p style="font-size:0.86rem;color:var(--text);line-height:1.72;margin-bottom:0.5rem;">
+      <strong>Tickets:</strong> 4-Stätten-Pass (12,50 €) deckt Galla Placidia, San Vitale, Sant'Apollinare Nuovo und das Baptisterium Neoniano ab. Online buchen auf <strong>ravennamosaici.it</strong> — im Sommer schnell ausgebucht.
+    </p>
+    <p style="font-size:0.86rem;color:var(--text);line-height:1.72;margin-bottom:0.5rem;">
+      <strong>Zeitslot-Pflicht:</strong> Für Galla Placidia und San Vitale Zeitslot bei der Buchung wählen. Galla Placidia hat sehr begrenzte Kapazität — frühzeitig buchen.
+    </p>
+    <p style="font-size:0.86rem;color:var(--text);line-height:1.72;margin-bottom:0;">
+      <strong>Öffnungszeiten</strong> (8. März – 2. November): täglich 9:00–19:00 Uhr, letzter Einlass 18:30 Uhr. Kleidung: bedeckte Schultern und Knie in allen Stationen.
+    </p>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       STATION 1: GALLA PLACIDIA
+  ══════════════════════════════════════ -->
+  <div class="sec-head">Station 1</div>
+  <div class="station">
+    <div class="station-header blue">
+      <div class="st-num">1</div>
+      <div class="st-meta">
+        <div class="st-time">Erste Station · ca. 20 Min. · Zeitslot Pflicht</div>
+        <div class="st-title">Mausoleo di Galla Placidia</div>
+        <div class="st-sub">Via Galla Placidia · direkt neben San Vitale · Parkplatz 2 Min.</div>
+        <div class="st-tags">
+          <span class="stag">UNESCO</span>
+          <span class="stag">5. Jh. n. Chr.</span>
+          <span class="stag">Zeitslot buchen</span>
+          <span class="stag">Absolutes Highlight</span>
+        </div>
+      </div>
+    </div>
+    <div class="station-body">
+
+      <img src="img/galla_placidia_aussen.jpg" alt="Mausoleo di Galla Placidia — Außenansicht" class="photo hero">
+      <p class="photo-cap">Das Mausoleum von außen — schlichter Backsteinbau in Kreuzform, 5. Jh. n. Chr. Der Glockenturm im Hintergrund gehört zu San Vitale.</p>
+
+      <p>Von außen ein schlichter roter Backsteinbau, kreuzförmig, keine zwanzig Meter lang — kein Hinweis auf das, was innen wartet. Der Übergang vom grellen Tageslicht in die Halbdunkelheit des Inneren ist bewusst inszeniert. Die Augen brauchen einen Moment. Dann beginnen die Mosaiken zu leuchten.</p>
+
+      <p><strong>Wer hat es gebaut?</strong> Galla Placidia — Tochter Kaiser Theodosius' I., Halbschwester des schwachen Honorius, der Ravenna zur Kaiserresidenz gemacht hatte. Sie wurde als Kind von den Westgoten als Geisel genommen, heiratete deren König Ataulf, wurde zurückgegeben, wieder verheiratet, Regentin für ihren minderjährigen Sohn Valentinian III. Von hier aus regierte sie das sterbende Westreich über 20 Jahre lang. Das Mausoleum ließ sie um 426 n. Chr. für sich errichten — die drei Marmorsarkophage im Inneren sind leer.</p>
+
+      <img src="img/galla_placidia_kreuzgewoelbe.jpg" alt="Kreuzgewölbe mit Sternenhimmel und Evangelistensymbolen" class="photo tall">
+      <p class="photo-cap">Das Kreuzgewölbe — goldenes Kreuz im Sternenhimmel, die vier Evangelistensymbole in den Zwickeln, darunter die Lünette mit dem heiligen Laurentius.</p>
+
+      <p><strong>Die Kuppel:</strong> Ein tiefdunkles Blau, darin über 800 Goldsterne in asymmetrischer Anordnung — und ein großes goldenes Kreuz im Zentrum. Die Asymmetrie ist Absicht: Wer sich unter dem Gewölbe dreht, hat das Gefühl, die Sterne würden sich mitbewegen. Byzantinische Mosaizisten platzierten die Sterne so, dass durch veränderte Blickwinkel ein Rotationseffekt entsteht.</p>
+
+      <img src="img/galla_placidia_alabaster.jpg" alt="Alabasterfenster von innen — warmes goldenes Licht" class="photo tall">
+      <p class="photo-cap">Eines der Alabasterfenster von innen — kein Glas, sondern hauchdünner Alabaster der das Tageslicht in warmes Gold verwandelt. Dieses Foto trifft den Effekt besser als jede Beschreibung.</p>
+
+      <div class="highlight">
+        Das Licht fällt nicht durch Glas, sondern durch <strong>hauchdünne Alabasterplatten</strong> — ein warmes, honigfarbenes Glühen das die Goldtesserae zum Flimmern bringt. Dieser Effekt ist einzigartig und nur im Tageslicht vollständig — das ist der Grund warum der Vormittag die richtige Wahl ist.
+      </div>
+
+      <p><strong>Die Bildprogramme:</strong> Im Lünettenbogen über dem Eingang steht Christus als Guter Hirte — jugendlich, bartlos, in der Ikonographie der Antike, nicht des Mittelalters. Eine der frühesten bekannten Darstellungen dieses Motivs. Die Evangelistensymbole in den Zwickeln — Löwe, Stier, Adler, Engel — rahmen das Kreuz im Gewölbe.</p>
+
+      <img src="img/galla_placidia_hirsch.jpg" alt="Hirsch im Paradiesgarten — Lünettenmosaik" class="photo hero">
+      <p class="photo-cap">Hirsch im Paradiesgarten — Lünettenmosaik. Psalm 42: »Wie der Hirsch lechzt nach frischem Wasser, so lechzt meine Seele nach dir, o Gott.«</p>
+
+      <p>Die <strong>Hirsche an der Quelle</strong> in den Lünetten sind kein dekoratives Motiv — sie sind direkter Verweis auf Psalm 42, eines der ältesten christlichen Sehnsuchtsmotive. Die Pfauen auf anderen Bögen stammen aus der römischen Antike: Das Fleisch des Pfaus galt als unverweslich — Unsterblichkeitssymbol, nahtlos in die christliche Bildsprache übernommen.</p>
+
+      <div class="info-row">
+        <div class="ichip">⏱ <strong>20 Min.</strong> einplanen</div>
+        <div class="ichip">🎟 Im 4-Stätten-Pass</div>
+        <div class="ichip">📅 Zeitslot Pflicht</div>
+        <div class="ichip">👗 Schultern bedeckt</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       STATION 2: SAN VITALE
+  ══════════════════════════════════════ -->
+  <div class="sec-head">Station 2</div>
+  <div class="station">
+    <div class="station-header blue">
+      <div class="st-num">2</div>
+      <div class="st-meta">
+        <div class="st-time">Direkt nebenan · ca. 40 Min.</div>
+        <div class="st-title">Basilica di San Vitale</div>
+        <div class="st-sub">Via San Vitale · kein Fußweg von Galla Placidia · Herzstück Ravennas</div>
+        <div class="st-tags">
+          <span class="stag">UNESCO</span>
+          <span class="stag">547 n. Chr.</span>
+          <span class="stag">Justinian &amp; Theodora</span>
+          <span class="stag">Arianisch → Byzantinisch</span>
+        </div>
+      </div>
+    </div>
+    <div class="station-body">
+
+      <img src="img/san_vitale_aussen.jpg" alt="Basilica di San Vitale — Außenansicht im Morgenlicht" class="photo hero">
+      <p class="photo-cap">San Vitale im Morgenlicht — der oktogonale Zentralbau, umgeben von Pinien. Die frühen Stunden sind die besten: wenige Besucher, ideales Licht im Inneren.</p>
+
+      <p>Direkt nebenan — kein Fußweg. San Vitale ist das kunsthistorisch bedeutendste Gebäude Ravennas und eines der wenigen vollständig erhaltenen Kirchengebäude aus der Zeit Justinians des Großen weltweit. Der Bau begann 526 n. Chr. unter ostgotischer, also <strong>arianischer</strong> Herrschaft — finanziert vom Bankier Julius Argentarius — und wurde 547/548 n. Chr. unter byzantinischer Herrschaft fertiggestellt.</p>
+
+      <p><strong>Architektur:</strong> San Vitale ist ein Zentralbau — ein achteckiger Grundriss mit zwei Stockwerken von Galerien, gewölbten Nischen und einem tiefen Presbyterium. Ungewöhnlich für westliche Kirchen, verbreitet im byzantinischen Osten. Die Wände lösen sich optisch auf, Licht bricht von allen Seiten, der Blick wird ständig umgeleitet.</p>
+
+      <img src="img/san_vitale_chor_gesamt.jpg" alt="San Vitale — Chorraum Gesamtansicht" class="photo tall">
+      <p class="photo-cap">Der Chorraum von unten — Apsiskalotte, Gewölbe, Bögen und Seitenwände in einem Blick. Die Dichte des Bildprogramms erschlägt beim ersten Anblick.</p>
+
+      <div class="dark-block">
+        <h4>Zwei Christusbilder — eine Theologie-Geschichte in einem Raum</h4>
+        <p>San Vitale zeigt etwas das man so nirgendwo sonst sieht: <strong>zwei gegensätzliche Christusikonographien, wenige Meter voneinander entfernt</strong> — sichtbarer Abdruck des Übergangs zwischen zwei Epochen und zwei Theologien.</p>
+        <p><strong>Die Apsiskalotte</strong> (das Halbkuppelgewölbe direkt über dem Altar): Christus thronend auf der blauen Weltkugel — <strong>bartlos, jugendlich</strong>. Das ist arianische Ikonographie aus der Gründungszeit des Baus. Die Arianer lehrten, Christus sei vom Vater geschaffen und ihm untergeordnet — kein Pantokrator, sondern ein Erhöhter. Der bartlose, menschlich-jugendliche Christus trägt diese Handschrift.</p>
+        <p><strong>Der Apsisbogen</strong> (der Triumphbogen davor, aus der byzantinischen Fertigstellungsphase): Christus <strong>bärtig</strong> — der orthodoxe Pantokrator, wesensgleich mit dem Vater, allmächtig. Derselbe Raum, dieselbe Sichtachse, entgegengesetzte Theologie. Ein eingefrorener Moment des Übergangs.</p>
+      </div>
+
+      <img src="img/san_vitale_chor_oben.jpg" alt="San Vitale — Chorraum von oben" class="photo tall">
+      <p class="photo-cap">Der Chorraum von oben — das Gewölbe mit dem Agnus Dei im Zentrum, umgeben von Ranken, Tieren und Engeln. Das Lamm Gottes war im 6. Jh. noch die häufigste Christusdarstellung.</p>
+
+      <p><strong>Das theologische Bildprogramm:</strong> Die Seitenwände des Chors zeigen alttestamentliche Opferszenen — Abraham mit Isaak, Melchisedek mit Brot und Wein, Abel mit dem Lamm. Das ist kein dekorativer Rückblick, sondern ein theologisches Argument: Alle drei präfigurieren die Eucharistie. Das Opfer am Altar darunter ist ihre Erfüllung. Wer das las — und die Bischöfe und Hofleute die hier saßen lasen es — sah keine Dekoration, sondern eine Heilsgeschichte in drei Akten.</p>
+
+      <div class="highlight">
+        <strong>Das Mosaikgeheimnis:</strong> Die Goldtesserae sind absichtlich in leicht unterschiedlichen Winkeln gesetzt — nicht bündig in der Wand, sondern minimal gekippt, jede anders. Bei Kerzenlicht — dem Originalzustand — flimmert die Goldfläche bei jeder Bewegung. Das ist keine technische Ungenauigkeit sondern bewusste Technik: Das Göttliche sollte nicht statisch sein. Dazu kommt die Krümmung der Gewölbe — Mosaik auf einer Hohlkugel streut Licht in den Raum zurück. Der gesamte Innenraum wird zur Lichtquelle.
+      </div>
+
+      <div class="photo-grid two">
+        <div>
+          <img src="img/san_vitale_justinian_gesamt.jpg" alt="Justinian-Mosaik Gesamtansicht">
+        </div>
+        <div>
+          <img src="img/san_vitale_theodora_gesamt.jpg" alt="Theodora-Mosaik Gesamtansicht">
+        </div>
+      </div>
+      <p class="photo-cap">Links: Justinian mit Hofstaat und Bischof Maximianus (einziger namentlich eingeschriebener). Rechts: Theodora mit Kelch und Hofdamen — beide nie in Ravenna, beide hier in Gold verewigt.</p>
+
+      <p><strong>Das Justinian-Mosaik (linke Apsisseite):</strong> Der Kaiser in kaiserlichem Purpur mit Goldnimbus — kein Heiliger, aber göttlich konnotiert — hält die Patene mit dem eucharistischen Brot. Neben ihm Bischof Maximian, dessen Name als einziger eingeschrieben ist. Die Figuren überlappen sich leicht — ein früher Versuch, Tiefe darzustellen. Jedes Detail Propaganda: der Kaiser als Verbinder von weltlicher und kirchlicher Macht.</p>
+
+      <div class="photo-grid two">
+        <div>
+          <img src="img/san_vitale_justinian_detail.jpg" alt="Justinian Detail — Goldnimbus, Patene, Maximianus">
+        </div>
+        <div>
+          <img src="img/san_vitale_theodora_detail.jpg" alt="Theodora Detail — Krone, Perlenschmuck, Hofdame">
+        </div>
+      </div>
+      <p class="photo-cap">Detail Justinian mit Goldnimbus und Patene. Detail Theodora — die aufwendige Perlenkrone, der Halsschmuck, der Purpurmantel dessen Saum die Drei Weisen Könige zeigt.</p>
+
+      <p><strong>Das Theodora-Mosaik (rechte Apsisseite):</strong> Die Kaiserin mit dem Kelch — der eucharistische Pendant zum Brot Justinians. Der Saum ihres Mantels zeigt die Drei Weisen Könige mit Gaben — Theodora bringt den Kelch: eine Kette von Gaben, vom Morgenland bis zum Altarraum. Theodora war Tochter eines Zirkuswärters, möglicherweise Schauspielerin, bevor sie Justinian heiratete und Mitkaiserin mit vollem Titel wurde. Eines der bedeutendsten Frauenportraits der Spätantike.</p>
+
+      <img src="img/san_vitale_taufbecken.jpg" alt="Taufbecken im Boden — mit Münzen bedeckt" class="photo hero">
+      <p class="photo-cap">Das originale frühchristliche Taufbecken, im Boden eingelassen — die Stufen führen hinunter, die zentrale Plattform markierte den Standort des Täuflings. Erwachsenentaufe durch Untertauchen war die ursprüngliche Praxis der frühen Kirche.</p>
+
+      <p><strong>Das Taufbecken:</strong> Im Boden des Kirchenschiffs eingelassen, quadratisch, mit einer zentralen Plattform und hinabführenden Stufen. Die Immersionstaufe — vollständiges Untertauchen — war in der Frühkirche die Norm. Der Täufling stieg hinein, wurde dreimal untergetaucht im Namen der Dreifaltigkeit, stieg auf der anderen Seite heraus: symbolisch als neuer Mensch. Dass das Becken direkt in den Kirchenraum integriert ist — ungewöhnlich, normalerweise war die Taufe räumlich getrennt in eigenen Baptisterien. Die Münzen darin sind natürlich moderner Touristenzusatz.</p>
+
+      <div class="info-row">
+        <div class="ichip">⏱ <strong>40 Min.</strong> einplanen</div>
+        <div class="ichip">🎟 Im 4-Stätten-Pass</div>
+        <div class="ichip">📍 Direkt neben Galla Placidia</div>
+        <div class="ichip">👗 Schultern bedeckt</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       ZWISCHENSTOPP: PIAZZA DEL POPOLO
+  ══════════════════════════════════════ -->
+  <div class="sec-head">Kaffeepause</div>
+  <div class="station">
+    <div class="station-header terra">
+      <div class="st-num">☕</div>
+      <div class="st-meta">
+        <div class="st-time">~10 Min. Fußweg · Pause</div>
+        <div class="st-title">Piazza del Popolo</div>
+        <div class="st-sub">Bar Il Nazionale · unter den Arkaden · Espresso</div>
+      </div>
+    </div>
+    <div class="station-body">
+
+      <img src="img/piazza_popolo_palazzo.jpg" alt="Piazza del Popolo — Palazzo del Comune mit venezianischen Säulen" class="photo hero">
+      <p class="photo-cap">Piazza del Popolo mit dem Palazzo del Comune — die zwei venezianischen Säulen tragen die Stadtpatrone Apollinaris (links) und Vitale (rechts). Die Zinnenkrone des Palazzo verweist auf mittelalterliche Stadtmacht.</p>
+
+      <p>Die schönste Piazza Ravennas. Die <strong>zwei Granitsäulen</strong> mit den Stadtpatronen San Vitale und San Apollinare wurden 1483 von Venedig gestiftet, als Ravenna unter venezianische Herrschaft kam — ein Machtsymbol als steinernes Geschenk. Der Palazzo del Comune dahinter ist mittelalterlich, mehrfach umgebaut, heute Rathaus.</p>
+
+      <img src="img/piazza_popolo_cafe_nazionale.jpg" alt="Bar Il Nazionale unter den Arkaden der Piazza del Popolo" class="photo hero">
+      <p class="photo-cap">Bar Il Nazionale unter den Arkaden — hier war die Kaffeepause. Das gotische Kapitell der Arkadenbögen ist sichtbar: mittelalterliche Struktur, modernes Café.</p>
+
+      <p>Die <strong>Bar Il Nazionale</strong> unter den Arkaden ist eine der besten Adressen für den Vormittagsespresso — Pasticceria, Gelateria, Außenbestuhlung. Kurz durchatmen, bevor es weitergeht.</p>
+
+      <img src="img/teatro_alighieri.jpg" alt="Teatro Alighieri — Opernhaus Ravennas mit Ravenna Festival Plakaten" class="photo hero">
+      <p class="photo-cap">Teatro Alighieri auf dem Weg zu Sant'Apollinare Nuovo — die Plakate zeigen Riccardo Muti und das Ravenna Festival. Das neoklassizistische Opernhaus wurde 1852 eingeweiht.</p>
+
+      <p>Auf dem Weg zur dritten Station kommt man am <strong>Teatro Alighieri</strong> vorbei — Ravennas Opernhaus, 1852 eingeweiht. Die Plakate zeigen das <strong>Ravenna Festival</strong>, das jährlich im Juni stattfindet: Riccardo Muti ist seit Jahrzehnten der künstlerische Hauptprotagonist und hat eine tiefe persönliche Bindung an die Stadt. Konzerte finden in den UNESCO-Stätten selbst statt, im Theater, in öffentlichen Gärten — eine Verbindung von Musik und Ort die anderswo so nicht existiert.</p>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       STATION 3: SANT'APOLLINARE NUOVO
+  ══════════════════════════════════════ -->
+  <div class="sec-head">Station 3</div>
+  <div class="station">
+    <div class="station-header blue">
+      <div class="st-num">3</div>
+      <div class="st-meta">
+        <div class="st-time">~10 Min. Fußweg vom Theater · ca. 35 Min.</div>
+        <div class="st-title">Basilica di Sant'Apollinare Nuovo</div>
+        <div class="st-sub">Via di Roma 53 · Theoderichs Palastkirche · zwei Epochen, ein Raum</div>
+        <div class="st-tags">
+          <span class="stag">UNESCO</span>
+          <span class="stag">490–561 n. Chr.</span>
+          <span class="stag">Arianische Zensur</span>
+          <span class="stag">Prozessionsmosaiken</span>
+        </div>
+      </div>
+    </div>
+    <div class="station-body">
+
+      <img src="img/apollinare_nuovo_aussen.jpg" alt="Sant'Apollinare Nuovo — Außenansicht mit Rundturm und Atrium" class="photo hero">
+      <p class="photo-cap">Außenansicht mit dem charakteristischen Rundcampanile aus dem 9./10. Jh. und dem vorgelagerten Atrium-Vorhof. Der Rundturm ist das Wahrzeichen der Kirche.</p>
+
+      <p>Sant'Apollinare Nuovo entstand um 490–505 n. Chr. als Palastkirche König Theoderichs des Großen — als <strong>arianische Kirche</strong>. Als Justinian 540 n. Chr. Ravenna zurückeroberte und 561 n. Chr. die arianischen Besitzungen der Orthodoxie übertrug, wurde die Kirche umgebaut und das Bildprogramm partiell zensiert. Was heute zu sehen ist, trägt die Spuren beider Epochen gleichzeitig.</p>
+
+      <img src="img/apollinare_nuovo_langhaus.jpg" alt="Langhaus von der Eingangstür zum Altar — Kassettendecke und beide Mosaikwände" class="photo tall">
+      <p class="photo-cap">Das Langhaus in voller Länge — die Kassettendecke aus dem 16./17. Jh. überwölbt das 6. Jh. darunter. Beide Mosaikwände ziehen sich durch den gesamten Raum.</p>
+
+      <p><strong>Die drei Wandzonen:</strong> Die Wände des Langhauses gliedern sich horizontal in drei Zonen, von oben nach unten:</p>
+      <p><strong>Oberste Zone</strong> — Christusszenen, entstanden unter Theoderich, der älteste erhaltene monumentale Christus-Zyklus der Welt. Die beiden Längsseiten zeigen unterschiedliche Themen: Die rechte Wand (Märtyrerseite) zeigt Szenen aus dem <strong>öffentlichen Wirken Christi</strong> — Wunder, Heilungen, Begegnungen. Die linke Wand (Jungfrauenseite) zeigt die <strong>Passionsgeschichte</strong> — Einzug in Jerusalem, Abendmahl, Kreuzigung, Auferstehung. Christus erscheint in allen Szenen bartlos und jugendlich — arianische Ikonographie, die Gottes Sohn als Erhöhten zeigt, nicht als allmächtigen Pantokrator.</p>
+
+      <img src="img/apollinare_nuovo_christusszenen_lazarus.jpg" alt="Oberste Wandzone — Christusszenen mit Auferweckung des Lazarus" class="photo hero">
+      <p class="photo-cap">Oberste Wandzone der rechten Seite — mehrere Szenen aus dem Wirken Christi. Links die Auferweckung des Lazarus, Mitte eine Taufszene mit Tauben, rechts Christus und die Samariterin am Brunnen.</p>
+
+      <p>Die <strong>Auferweckung des Lazarus</strong> (Johannes 11) links im Bild — Lazarus tritt noch im Leichentuch aus dem Grabmal, Christus steht davor. Diese Szene war in der frühchristlichen Kunst eines der beliebtesten Motive überhaupt: nicht als bloße Wundergeschichte, sondern als <strong>Vorausbild der eigenen Auferstehung</strong>. Wer ins Grab schaut und Lazarus heraustreten sieht, soll an die eigene Hoffnung auf Auferstehung erinnert werden. Die Darstellungsformel — Christus mit dem Stab des Wundertäters — ist direkt aus dem hellenistischen Bildvokabular übernommen: Antike Götter und Philosophen wurden mit demselben Attribut dargestellt. Frühchristliche Kunst sprach die Bildsprache die ihre Betrachter kannten.</p>
+
+      <p><strong>Mittlere Zone</strong> (zwischen Fenstern): stehende Propheten und Apostel, einzeln, frontal, jeder mit Schriftrolle oder Buch.</p>
+      <p><strong>Untere Zone</strong> (die beeindruckendste): die großen Prozessionsmosaiken, nach der byzantinischen Übernahme entstanden.</p>
+
+      <img src="img/apollinare_nuovo_jungfrauen_gesamt_1.jpg" alt="Jungfrauenprozession — Gesamtansicht mit Kassettendecke" class="photo hero">
+      <p class="photo-cap">Die Jungfrauenprozession auf der linken Wand — 22 Heilige in Gold, angeführt von den Drei Weisen Königen, ziehen vom Hafen Classis zur Madonna mit Kind.</p>
+
+      <img src="img/apollinare_nuovo_jungfrauen_gesamt_2.jpg" alt="Jungfrauenprozession — zweite Gesamtansicht" class="photo hero">
+      <p class="photo-cap">Gesamtperspektive der Jungfrauenprozession mit der Kassettendecke aus dem 16./17. Jh. — das Gold der Mosaiken und das Gold der Decke spannen den Raum von unten bis oben auf.</p>
+
+      <img src="img/apollinare_nuovo_jungfrauen_detail.jpg" alt="Detail der Jungfrauenprozession — Inschriften, Kranzopfer" class="photo hero">
+      <p class="photo-cap">Detail der Jungfrauen — die Inschriften der Heiligennamen gut lesbar, Kranzopfer in den Händen, Palmzweige dahinter. Die Gleichförmigkeit ist Programm: Individualität löst sich auf in der kollektiven Bewegung auf Gott zu.</p>
+
+      <img src="img/apollinare_nuovo_valeriacrespina.jpg" alt="Sancta Valeria und Sancta Crispina — Detail" class="photo hero">
+      <p class="photo-cap">Sancta Valeria und Sancta Crispina — die Namen gut lesbar. Die byzantinischen Gewänder, Goldschmuck und Palmzweige folgen einem festen Schema, das dennoch feine individuelle Variationen enthält.</p>
+
+      <img src="img/apollinare_nuovo_maertyrer_detail.jpg" alt="Männliche Märtyrerprozession — Vitalis, Gervasius, Protasius" class="photo wide">
+      <p class="photo-cap">Die männliche Märtyrerprozession auf der rechten Wand — die Namen Vitalis, Gervasius, Protasius lesbar: die Ravennater Stadtheiligen in ihrer eigenen Kirche.</p>
+
+      <p><strong>Die beiden Prozessionen</strong> sind das Herz des Bildprogramms:</p>
+      <p><strong>Linke Wand:</strong> 22 Jungfrauen, angeführt von den Drei Weisen Königen, ziehen vom Hafen Classis zur Madonna mit Kind. Dies ist vermutlich die älteste bildliche Darstellung der Heiligen Drei Könige mit den Namen Balthasar, Melchior und Caspar.</p>
+      <p><strong>Rechte Wand:</strong> 26 männliche Märtyrer, angeführt vom heiligen Martin, ziehen vom Palast Theoderichs zu einem thronenden Christus.</p>
+
+      <div class="dark-block">
+        <h4>Die arianische Zensur — sichtbare Geschichte</h4>
+        <p>Die ursprünglichen Mosaiken aus Theoderichs Zeit zeigten seinen Hofstaat in den Wandflächen zwischen den Fenstern. Nach der byzantinischen Übernahme wurden die Figuren entfernt und durch neutrale Vorhänge ersetzt — aber nicht vollständig.</p>
+        <p><strong>An den Säulen des Palastmosaiks sind noch heute die Hände der ursprünglichen Hofbeamten sichtbar</strong> — beim Übermalen übersehen. Politische Zensur aus dem 6. Jahrhundert als bleibende Spur. Eine der faszinierendsten Überreste byzantinischer Bilderzensur überhaupt.</p>
+      </div>
+
+      <div class="photo-grid two">
+        <div>
+          <img src="img/apollinare_nuovo_hafen_classis.jpg" alt="Hafen Classis — Stadtpanorama mit Inschrift CIVE CLASSI">
+        </div>
+        <div>
+          <img src="img/apollinare_nuovo_palast_haende.jpg" alt="Vorhänge des Palastes — Zensur der arianischen Hofbeamten">
+        </div>
+      </div>
+      <p class="photo-cap">Links: Der Hafen Classis mit Inschrift "CIVE CLASSI" — die einzige zeitgenössische Darstellung des antiken Kriegshafens, der heute 10 km vom Meer entfernt unter Feldern liegt. Rechts: Die Vorhänge die die herausgemeißelten Hofbeamten Theoderichs verdecken — byzantinische Bilderzensur.</p>
+
+      <img src="img/apollinare_nuovo_palast_theoderich.jpg" alt="Palast Theoderichs — PALATIUM Inschrift" class="photo hero">
+      <p class="photo-cap">Der Palast Theoderichs mit der Inschrift "PALATIUM" — das historische Dokument des arianischen Ravenna. Die Vorhänge verdecken die Stellen wo einst Theoderichs Hofstaat stand.</p>
+
+      <img src="img/apollinare_nuovo_kreuzgang_turm.jpg" alt="Kreuzgang mit Blick auf den Campanile" class="photo hero">
+      <p class="photo-cap">Der Kreuzgang neben der Basilika — Blick auf den Campanile. Ein ruhiger Ort nach dem Intensiverlebnis des Inneren.</p>
+
+      <img src="img/apollinare_nuovo_kreuzgang_weinreben.jpg" alt="Kreuzgang mit Weinreben im Gegenlicht" class="photo hero">
+      <p class="photo-cap">Kreuzgang mit Weinreben im Gegenlicht — der stille Innenhof, durch den die Besucher ein- und ausziehen. Das Grün der Weinreben gegen das Backsteindunkel: ein atmosphärischer Abschluss.</p>
+
+      <div class="info-row">
+        <div class="ichip">⏱ <strong>35 Min.</strong> einplanen</div>
+        <div class="ichip">🎟 Im 4-Stätten-Pass</div>
+        <div class="ichip">🚶 <strong>~10 Min.</strong> vom Teatro Alighieri</div>
+        <div class="ichip">👗 Schultern bedeckt</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       NÄCHSTE REISE
+  ══════════════════════════════════════ -->
+  <div class="optional-intro">
+    <h2>Für den nächsten Besuch</h2>
+    <p>Diese vier Orte konnten diesmal nicht mehr besichtigt werden — teils aus Zeitmangel, teils weil der Tag anders verlief. Sie gehören zu Ravenna und warten auf die nächste Reise. Kurze Einführung zu jedem.</p>
+  </div>
+
+  <div class="opt-card">
+    <div class="opt-card-head">
+      <div class="opt-icon">✦</div>
+      <div>
+        <div class="opt-title">Battistero Neoniano</div>
+        <div class="opt-sub">Piazza del Duomo · Im 4-Stätten-Pass enthalten · Zeitslot nötig</div>
+      </div>
+    </div>
+    <div class="opt-body">
+      <p>Das älteste Monument Ravennas — ein frühchristliches Baptisterium aus dem 5. Jahrhundert mit einer vollständig mosaikbedeckten Kuppel. Im Zentrum der Kuppel: die Taufe Christi im Jordan, Johannes der Täufer, die Hand Gottes, die Taube des Heiligen Geistes. Darum herum eine Apostelprozession — zwölf Figuren die in der Kuppelrundung auf Christus zuziehen.</p>
+      <p>Kleines Gebäude, schnell zu erschließen — aber die Kuppelmosaiken gehören zu den besterhaltenen des 5. Jahrhunderts. Im 4-Stätten-Pass bereits enthalten, ein separater Zeitslot ist erforderlich. Zeitslot-Pflicht weil die Kapazität sehr begrenzt ist.</p>
+      <div class="ticket-row">
+        <div class="tchip">Im <strong>4-Stätten-Pass</strong></div>
+        <div class="tchip">⏱ <strong>15 Min.</strong> reichen</div>
+        <div class="tchip">📅 <strong>Zeitslot</strong> buchen</div>
+        <div class="tchip">🚶 <strong>5 Min.</strong> vom Zentrum</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="opt-card">
+    <div class="opt-card-head">
+      <div class="opt-icon">📖</div>
+      <div>
+        <div class="opt-title">Tomba di Dante</div>
+        <div class="opt-sub">Via Dante Alighieri · kostenlos · öffnet 10:00 Uhr</div>
+      </div>
+    </div>
+    <div class="opt-body">
+      <p>Dante Alighieri starb 1321 in Ravenna — im Exil aus Florenz, von der Stadt aufgenommen als er nirgendwo sonst willkommen war. Er liegt hier begraben, nicht in Florenz. Die Stadt am Arno hat sich Jahrhunderte lang um die Gebeine bemüht — Ravenna verweigerte es beharrlich bis heute.</p>
+      <p>Ein stiller, kleiner neoklassizistischer Grabbau — keine große Stätte, aber ein bedeutender Ort. Eine Laterne brennt ewiges Licht. Kostenlos, 5 Minuten Fußweg vom Zentrum, öffnet erst um 10:00 Uhr.</p>
+      <div class="ticket-row">
+        <div class="tchip"><strong>Kostenlos</strong></div>
+        <div class="tchip">🕙 Ab <strong>10:00 Uhr</strong></div>
+        <div class="tchip">⏱ <strong>10 Min.</strong></div>
+        <div class="tchip">🚶 Auf dem Weg zu Sant'Apollinare</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="opt-card">
+    <div class="opt-card-head">
+      <div class="opt-icon">⚔</div>
+      <div>
+        <div class="opt-title">Mausoleo di Teodorico</div>
+        <div class="opt-sub">Via delle Industrie · 5 € separat · 2 km außerhalb</div>
+      </div>
+    </div>
+    <div class="opt-body">
+      <p>Das Grabmal Theoderichs des Großen — erbaut um 520 n. Chr., einzigartiger Rundbau aus riesigen istrischen Kalksteinblöcken, <strong>ohne Mörtel gefügt</strong>. Die Deckplatte ein einziger Stein, 230 Tonnen schwer — wie er transportiert und gehoben wurde, ist bis heute nicht vollständig geklärt. Ein Rätsel der Bautechnik aus dem 6. Jahrhundert.</p>
+      <p>Architektonisch völlig anders als alle anderen Ravennater Monumente — keine Mosaiken, kein Backsteinbau, sondern monumentaler Steinbau in gotischer Tradition. Theoderich, der Dietrich von Bern der deutschen Heldensage, liegt hier begraben — obwohl die ursprünglichen Porphyr-Sarkophage verloren sind. 2 km außerhalb des Zentrums, eigene Eintrittskarte.</p>
+      <div class="ticket-row">
+        <div class="tchip"><strong>5 €</strong> separat</div>
+        <div class="tchip">🚗 <strong>2 km</strong> außerhalb</div>
+        <div class="tchip">⏱ <strong>30 Min.</strong></div>
+        <div class="tchip">🕘 Ab <strong>9:00 Uhr</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="opt-card">
+    <div class="opt-card-head">
+      <div class="opt-icon">⛵</div>
+      <div>
+        <div class="opt-title">Sant'Apollinare in Classe + Museo Classis</div>
+        <div class="opt-sub">Via Romea Sud 224 · 8 km südlich · Kombiticket 9 €</div>
+      </div>
+    </div>
+    <div class="opt-body">
+      <p><strong>Die Basilika:</strong> Frühchristliche Basilika aus dem 6. Jahrhundert, 549 n. Chr. eingeweiht, auf dem Gelände des antiken Kriegshafens Classis. Von außen schlichter Backsteinbau mit freistehendem Rundcampanile — innen ein Schock: das Apsismosaik zeigt Bischof Apollinaris zwischen zwölf Lämmern auf einer Paradieswiese, darüber die Verklärung Christi als goldenes Kreuz im blauen Sternenhimmel — keine figurative Szene, sondern kosmisches Symbol. Ein anderer Pol zum Gold-und-Macht-Programm von San Vitale: hier Stille, Weite, pastorales Grün.</p>
+      <p><strong>Der antike Hafen Classis</strong> selbst ist oberirdisch nicht mehr zu sehen — das Po-Delta hat das Gelände über Jahrhunderte verschlickt, die Adria ist heute 10 km entfernt. Was einmal 250 Kriegsschiffe fasste, liegt unter Feldern. Die Funde sind im <strong>Museo Classis</strong> nebenan: Schiffsausrüstung, Amphoren, Architekturteile, das berühmte Mosaico dei Pugili (römische Boxerdarstellung), Multimedia-Rekonstruktionen. Untergebracht in einer umgebauten Zuckerfabrik aus dem frühen 20. Jahrhundert — die Industriearchitektur ist Teil des Konzepts.</p>
+      <div class="ticket-row">
+        <div class="tchip">Kombi <strong>9 €</strong></div>
+        <div class="tchip">🕘 Ab <strong>8:30 Uhr</strong></div>
+        <div class="tchip">🅿 <strong>Gratis</strong> gegenüber</div>
+        <div class="tchip">⏱ Basilika <strong>45 Min.</strong> + Museum <strong>60 Min.</strong></div>
+        <div class="tchip">🚗 Auf dem Weg Richtung Autobahn</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  Ravenna · UNESCO-Weltkulturerbe · Alle Fotos: eigene Aufnahmen · Reisedokumentation
+</footer>
+
+</body>
+</html>
