@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workflow Guide — Reiseführer Publishing</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #1B3A6B;
+    --blue-light: #2952a3;
+    --gold: #C9A84C;
+    --gold-bg: #F5EDD8;
+    --green: #2d6a2d;
+    --green-light: #e8f5e8;
+    --red: #8B2020;
+    --red-light: #fdf0f0;
+    --orange: #A85C3A;
+    --orange-light: #fdf3ee;
+    --deep: #0D1F3C;
+    --cream: #F8F3EA;
+    --text: #2A1F0E;
+    --text-light: #6B5740;
+    --divider: #DDD0B8;
+    --code-bg: #1e2836;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.72;
+  }
+
+  header {
+    background: var(--deep);
+    color: white;
+    padding: 2.5rem 1.8rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 10% 70%, rgba(201,168,76,0.15) 0%, transparent 55%),
+      radial-gradient(ellipse at 85% 15%, rgba(27,58,107,0.4) 0%, transparent 50%);
+  }
+
+  header .inner {
+    position: relative;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  header .eyebrow {
+    font-size: 0.67rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1.15;
+  }
+
+  header h1 em {
+    font-style: italic;
+    color: var(--gold);
+    display: block;
+    font-size: 1.1rem;
+    margin-top: 0.2rem;
+  }
+
+  header .subtitle {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.85rem;
+    margin-top: 0.8rem;
+  }
+
+  /* NAV */
+  .toc {
+    background: var(--blue);
+    padding: 1rem 1.8rem;
+  }
+
+  .toc-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .toc a {
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 12px;
+    white-space: nowrap;
+  }
+
+  /* MAIN */
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2rem 1.4rem 3rem;
+  }
+
+  /* SECTION */
+  .section {
+    margin-bottom: 3rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 2px solid var(--gold);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .section-title .num {
+    background: var(--blue);
+    color: var(--gold);
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  /* ABLAGEORTE DIAGRAM */
+  .flow-diagram {
+    background: var(--deep);
+    border-radius: 10px;
+    padding: 1.4rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .flow-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .flow-box {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
+    border-radius: 8px;
+    padding: 0.6rem 0.9rem;
+    text-align: center;
+    min-width: 110px;
+  }
+
+  .flow-box .fb-icon { font-size: 1.3rem; display: block; margin-bottom: 0.2rem; }
+  .flow-box .fb-name { font-size: 0.8rem; font-weight: 700; color: var(--gold); display: block; }
+  .flow-box .fb-desc { font-size: 0.68rem; color: rgba(255,255,255,0.55); display: block; margin-top: 0.1rem; }
+
+  .flow-arrow {
+    color: var(--gold);
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .flow-note {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.65);
+    text-align: center;
+    border-top: 1px solid rgba(201,168,76,0.2);
+    padding-top: 0.8rem;
+    line-height: 1.6;
+  }
+
+  .flow-note strong { color: var(--gold); }
+
+  /* STEP CARDS */
+  .step {
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 0.8rem;
+  }
+
+  .step-head {
+    padding: 0.75rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .step-head.blue   { background: var(--blue); }
+  .step-head.green  { background: var(--green); }
+  .step-head.orange { background: var(--orange); }
+  .step-head.dark   { background: #2a3a4a; }
+
+  .step-num {
+    width: 1.8rem;
+    height: 1.8rem;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.2);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .step-title {
+    font-weight: 700;
+    color: white;
+    font-size: 0.9rem;
+  }
+
+  .step-where {
+    font-size: 0.68rem;
+    color: rgba(255,255,255,0.6);
+    margin-left: auto;
+    white-space: nowrap;
+    background: rgba(255,255,255,0.1);
+    padding: 0.15rem 0.5rem;
+    border-radius: 10px;
+  }
+
+  .step-body {
+    background: white;
+    padding: 0.9rem 1rem;
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.65;
+  }
+
+  .step-body p { margin-bottom: 0.5rem; }
+  .step-body p:last-child { margin-bottom: 0; }
+  .step-body strong { color: var(--blue); font-weight: 600; }
+
+  /* WARNING / TIP BOXES */
+  .warn {
+    background: var(--red-light);
+    border-left: 3px solid var(--red);
+    border-radius: 0 5px 5px 0;
+    padding: 0.7rem 1rem;
+    margin: 0.7rem 0;
+    font-size: 0.83rem;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .warn strong { color: var(--red); }
+
+  .tip {
+    background: var(--green-light);
+    border-left: 3px solid var(--green);
+    border-radius: 0 5px 5px 0;
+    padding: 0.7rem 1rem;
+    margin: 0.7rem 0;
+    font-size: 0.83rem;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .tip strong { color: var(--green); }
+
+  .info {
+    background: var(--gold-bg);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 5px 5px 0;
+    padding: 0.7rem 1rem;
+    margin: 0.7rem 0;
+    font-size: 0.83rem;
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* CODE / PATH */
+  .path {
+    font-family: 'Courier New', monospace;
+    background: var(--code-bg);
+    color: #7dd3a8;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+
+  .code-block {
+    background: var(--code-bg);
+    color: #e8e8e8;
+    border-radius: 6px;
+    padding: 0.9rem 1rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    line-height: 1.7;
+    margin: 0.6rem 0;
+    overflow-x: auto;
+  }
+
+  .code-block .comment { color: #6a9955; }
+  .code-block .highlight { color: #7dd3a8; }
+
+  /* STATUS INDICATORS */
+  .status-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0.6rem 0;
+  }
+
+  .status-item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 0.83rem;
+    padding: 0.5rem 0.7rem;
+    border-radius: 5px;
+    background: white;
+    border: 1px solid var(--divider);
+  }
+
+  .status-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .dot-green  { background: #2d6a2d; }
+  .dot-blue   { background: #1B3A6B; }
+  .dot-yellow { background: #C9A84C; }
+  .dot-orange { background: #A85C3A; }
+  .dot-grey   { background: #aaa; }
+
+  .status-label { font-weight: 600; color: var(--text); min-width: 80px; }
+  .status-desc  { color: var(--text-light); }
+
+  /* WHERE TABLE */
+  .where-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.83rem;
+    margin: 0.6rem 0;
+  }
+
+  .where-table th {
+    text-align: left;
+    padding: 0.5rem 0.7rem;
+    background: var(--blue);
+    color: var(--gold);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .where-table td {
+    padding: 0.5rem 0.7rem;
+    border-bottom: 1px solid var(--divider);
+    vertical-align: top;
+  }
+
+  .where-table tr:last-child td { border-bottom: none; }
+  .where-table tr:nth-child(even) td { background: #f8f5f0; }
+  .where-table td strong { color: var(--blue); }
+
+  /* TOOL BADGE */
+  .tool {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    margin-right: 0.3rem;
+  }
+
+  .tool-wc     { background: #e8f0ff; color: #1B3A6B; }
+  .tool-gh     { background: #f0f0f0; color: #333; }
+  .tool-od     { background: #e8f5ff; color: #0078d4; }
+  .tool-claude { background: #fff0e8; color: #8B4513; }
+
+
+  /* DEVICE BADGES */
+  .device {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 0.2rem 0.55rem;
+    border-radius: 10px;
+    margin: 0.2rem 0.2rem 0.2rem 0;
+    white-space: nowrap;
+  }
+  .device-iphone  { background: #e8f0ff; color: #1B3A6B; border: 1px solid #b8cef0; }
+  .device-notebook { background: #f0f0f0; color: #333; border: 1px solid #ccc; }
+  .device-both    { background: #e8f5e8; color: #2d6a2d; border: 1px solid #b0d0b0; }
+
+  .split-box {
+    border: 1px solid var(--divider);
+    border-radius: 7px;
+    overflow: hidden;
+    margin: 0.7rem 0;
+  }
+
+  .split-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+
+  @media (max-width: 500px) { .split-row { grid-template-columns: 1fr; } }
+
+  .split-cell {
+    padding: 0.8rem 1rem;
+    font-size: 0.83rem;
+    line-height: 1.6;
+    color: var(--text);
+    border-right: 1px solid var(--divider);
+  }
+
+  .split-cell:last-child { border-right: none; }
+  .split-cell:nth-child(even) { background: #f8f5f0; }
+
+  .split-head {
+    padding: 0.4rem 1rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .split-head.iphone   { background: #e8f0ff; color: #1B3A6B; }
+  .split-head.notebook { background: #f0f0f0; color: #444; }
+
+  /* AUSBLICK */
+  .ausblick {
+    background: var(--deep);
+    border-radius: 10px;
+    padding: 1.6rem 1.8rem;
+    margin-top: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .ausblick::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201,168,76,0.1), transparent 70%);
+  }
+
+  .ausblick h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--gold);
+    margin-bottom: 0.7rem;
+    font-style: italic;
+    position: relative;
+  }
+
+  .ausblick p {
+    font-size: 0.85rem;
+    color: rgba(248,243,234,0.78);
+    line-height: 1.72;
+    margin-bottom: 0.6rem;
+    position: relative;
+  }
+
+  .ausblick p:last-child { margin-bottom: 0; }
+  .ausblick strong { color: var(--gold-light, #E8D5A3); }
+
+  .wip {
+    display: inline-block;
+    background: rgba(201,168,76,0.2);
+    color: var(--gold);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+
+  footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.7rem;
+    color: var(--text-light);
+    border-top: 1px solid var(--divider);
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <div class="eyebrow">Persönlicher Workflow · iPhone only</div>
+    <h1>GitHub Pages Publishing
+      <em>Workflow Guide — Stand Juni 2026</em>
+    </h1>
+    <p class="subtitle">Erarbeitet aus echten Fehlern · optimiert für iPhone · Claude + Working Copy + OneDrive</p>
+  </div>
+</header>
+
+<div class="toc">
+  <div class="toc-inner">
+    <a href="#ablageorte">1 · Ablageorte</a>
+    <a href="#tools">2 · Werkzeuge</a>
+    <a href="#neues-projekt">3 · Neues Projekt</a>
+    <a href="#datei-aktualisieren">4 · Datei aktualisieren</a>
+    <a href="#bilder">5 · Bilder</a>
+    <a href="#status">6 · Status prüfen</a>
+    <a href="#quelltext">7 · Quelltext lesen</a>
+    <a href="#notfall">8 · Notfallplan</a>
+    <a href="#fallstricke">9 · Fallstricke</a>
+    <a href="#prompt">10 · Prompt-Vorlage</a>
+    <a href="#naechste-schritte">→ Rimini jetzt</a>
+    <a href="#ausblick">→ Ausblick Shortcuts</a>
+  </div>
+</div>
+
+<main>
+
+  <!-- ══ 1. ABLAGEORTE ══ -->
+  <div class="section" id="ablageorte">
+    <div class="section-title"><span class="num">1</span> Die vier Ablageorte</div>
+
+    <div class="flow-diagram">
+      <div class="flow-row">
+        <div class="flow-box">
+          <span class="fb-icon">📷</span>
+          <span class="fb-name">Foto App</span>
+          <span class="fb-desc">iOS Namen<br>IMG_3xxx</span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">
+          <span class="fb-icon">☁️</span>
+          <span class="fb-name">OneDrive</span>
+          <span class="fb-desc">Zwischenlager<br>umbenennen</span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">
+          <span class="fb-icon">📱</span>
+          <span class="fb-name">Working Copy</span>
+          <span class="fb-desc">lokale Kopie<br>commit</span>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-box">
+          <span class="fb-icon">🌐</span>
+          <span class="fb-name">GitHub</span>
+          <span class="fb-desc">live online<br>push</span>
+        </div>
+      </div>
+      <div class="flow-note">
+        <strong>Wichtig:</strong> Nach dem Import in Working Copy ist die Datei dort eine eigenständige Kopie — OneDrive ist danach irrelevant. Working Copy ist die lokale Quelle, GitHub die online Quelle. Beide müssen immer synchron sein.
+      </div>
+    </div>
+
+    <table class="where-table">
+      <thead>
+        <tr><th>Ablageort</th><th>Zweck</th><th>Was dort bleibt</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Foto App</strong></td>
+          <td>Originalfotos vom iPhone</td>
+          <td>Immer — nie löschen</td>
+        </tr>
+        <tr>
+          <td><strong>OneDrive</strong></td>
+          <td>Umbenennen, Zwischenlager, Backup</td>
+          <td>Bleibt als Backup — ist aber nicht die Quelle für GitHub</td>
+        </tr>
+        <tr>
+          <td><strong>Working Copy</strong></td>
+          <td>Lokale Arbeitskopie des Repositories</td>
+          <td>Identisch mit GitHub nach erfolgreichem Push</td>
+        </tr>
+        <tr>
+          <td><strong>GitHub</strong></td>
+          <td>Online-Quelle, live unter github.io</td>
+          <td>Alles was committed und gepusht wurde</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ══ 2. WERKZEUGE ══ -->
+  <div class="section" id="tools">
+    <div class="section-title"><span class="num">2</span> Werkzeuge und wofür</div>
+
+    <table class="where-table">
+      <thead>
+        <tr><th>Tool</th><th>Wofür</th><th>Nicht geeignet für</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tool tool-claude">Claude</span></td>
+          <td>HTML erstellen, Texte schreiben, Fehler korrigieren, Dateinamen vergeben</td>
+          <td>Bilder herunterladen, direkt auf GitHub schreiben</td>
+        </tr>
+        <tr>
+          <td><span class="tool tool-wc">Working Copy</span></td>
+          <td>Dateien ins Repository laden, Commit, Push, Umbenennen in WC</td>
+          <td>Ordner verschieben/umbenennen, Drag & Drop funktioniert nicht zuverlässig</td>
+        </tr>
+        <tr>
+          <td><span class="tool tool-gh">github.com</span></td>
+          <td>Status prüfen (Actions), Quelltext lesen, Einzeldatei bearbeiten (github.dev)</td>
+          <td>Ordner umbenennen ohne github.dev</td>
+        </tr>
+        <tr>
+          <td><span class="tool tool-gh">github.dev</span></td>
+          <td>Dateien umbenennen/verschieben per Rechtsklick im Explorer, Ordnerstruktur ändern</td>
+          <td>Drag & Drop auf iPhone funktioniert nicht</td>
+        </tr>
+        <tr>
+          <td><span class="tool tool-od">OneDrive</span></td>
+          <td>Fotos umbenennen, Zwischenspeicher vor Import in Working Copy</td>
+          <td>HTML direkt teilen (öffnet als Download, nicht als Webseite)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ══ 3. NEUES PROJEKT ══ -->
+  <div class="section" id="neues-projekt">
+    <div class="section-title"><span class="num">3</span> Neues Projekt anlegen</div>
+
+    <div class="step">
+      <div class="step-head blue">
+        <div class="step-num">1</div>
+        <div class="step-title">HTML-Dateien von Claude speichern</div>
+        <span class="step-where">Claude → Working Copy oder OneDrive</span>
+      </div>
+      <div class="step-body">
+        <p>Claude liefert fertige HTML-Dateien. Es gibt zwei Wege:</p>
+        <div class="split-box">
+          <div class="split-row">
+            <div class="split-head iphone">📱 Direkter Weg — Claude → WC</div>
+            <div class="split-head notebook">☁️ Robuster Weg — Claude → OneDrive</div>
+          </div>
+          <div class="split-row">
+            <div class="split-cell">HTML in Claude antippen → Teilen → <strong>"Process in Working Copy"</strong> → WC öffnet sich und fragt wohin. Kein OneDrive-Umweg nötig.</div>
+            <div class="split-cell">HTML herunterladen → in OneDrive speichern. Bleibt als Backup erhalten, unabhängig von GitHub und Working Copy. Empfohlen wenn alle Projektunterlagen in OneDrive liegen.</div>
+          </div>
+        </div>
+        <div class="tip"><strong>Für Bilder gilt immer der OneDrive-Weg</strong> — die kommen aus der Foto App und müssen dort umbenannt werden. Der Direktweg gilt nur für HTML-Dateien.</div>
+        <p>Dateiname immer: <span class="path">index.html</span> — das Verzeichnis ist der sprechende Name.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-head blue">
+        <div class="step-num">2</div>
+        <div class="step-title">Ordnerstruktur anlegen</div>
+        <span class="step-where">📱 Working Copy</span>
+      </div>
+      <div class="step-body">
+        <p>Repository <span class="path">pages</span> öffnen → <strong>+</strong> → <strong>Verzeichnis erstellen</strong> → z.B. <span class="path">2026_cesenatico</span></p>
+        <p>Reingehen → <strong>+</strong> → <strong>Verzeichnis erstellen</strong> → <span class="path">ravenna</span></p>
+        <p>Reingehen → <strong>+</strong> → <strong>Verzeichnis erstellen</strong> → <span class="path">img</span></p>
+        <div class="tip"><strong>Namenskonvention:</strong> Jahreszahl vorne, Unterstrich statt Bindestrich, alles kleingeschrieben: <span class="path">2026_cesenatico/ravenna/img/</span></div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-head blue">
+        <div class="step-num">3</div>
+        <div class="step-title">HTML-Dateien importieren</div>
+        <span class="step-where">Working Copy</span>
+      </div>
+      <div class="step-body">
+        <p>In den Projektordner navigieren (z.B. <span class="path">ravenna</span>) → <strong>+</strong> → <strong>Dateien importieren</strong> → OneDrive navigieren → HTML-Dateien auswählen → bestätigen.</p>
+        <div class="warn"><strong>Achtung Duplikate:</strong> Wenn eine Datei bereits existiert, legt Working Copy eine <span class="path">datei-2.html</span> an statt zu überschreiben. Alte Datei zuerst löschen, dann neue importieren — oder alte danach umbenennen und neue löschen.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-head blue">
+        <div class="step-num">4</div>
+        <div class="step-title">Bilder importieren</div>
+        <span class="step-where">📱 WC &nbsp;·&nbsp; 💻 github.dev</span>
+      </div>
+      <div class="step-body">
+        <div class="split-box">
+          <div class="split-row">
+            <div class="split-head iphone">📱 iPhone — Working Copy</div>
+            <div class="split-head notebook">💻 Notebook — github.dev</div>
+          </div>
+          <div class="split-row">
+            <div class="split-cell">In <span class="path">img</span> navigieren → <strong>+</strong> → <strong>Dateien importieren</strong> → OneDrive → Unterordner <span class="path">img</span> → <strong>Alle auswählen</strong> → bestätigen. Dann Commit & Push.</div>
+            <div class="split-cell">Im Windows Explorer den <span class="path">img</span>-Ordner aus OneDrive per <strong>Drag & Drop</strong> direkt in den github.dev Explorer ziehen — ganzer Ordner auf einmal. Dann links Source Control → Commit & Push.</div>
+          </div>
+        </div>
+        <div class="tip"><strong>Bilder kommen aus OneDrive</strong> — dort liegen sie bereits umbenannt mit den richtigen Namen.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-head green">
+        <div class="step-num">5</div>
+        <div class="step-title">Commit & Push</div>
+        <span class="step-where">Working Copy</span>
+      </div>
+      <div class="step-body">
+        <p>Fingerabdruck-Button → Commit-Ansicht öffnet sich.</p>
+        <p><strong>Wichtig:</strong> Links alle Häkchen setzen oder <strong>Alle auswählen</strong> antippen — erst dann sind alle Dateien im Commit enthalten.</p>
+        <p><strong>Push-Toggle oben auf grün stellen</strong> → Commit-Nachricht eingeben → <strong>Commit</strong> antippen → Commit und Push in einem Schritt.</p>
+        <div class="tip"><strong>Push-Toggle grün</strong> = Commit und Push zusammen. <strong>Push-Toggle grau</strong> = nur Commit, Push danach separat nötig.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-head green">
+        <div class="step-num">6</div>
+        <div class="step-title">Deployment prüfen</div>
+        <span class="step-where">github.com → Actions</span>
+      </div>
+      <div class="step-body">
+        <p><span class="path">github.com/maroldm/pages</span> → <strong>Actions</strong> → oberster Eintrag zeigt den Status:</p>
+        <div class="status-row">
+          <div class="status-item"><div class="status-dot dot-yellow"></div><span class="status-label">In progress</span><span class="status-desc">Deployment läuft noch — warten</span></div>
+          <div class="status-item"><div class="status-dot dot-green"></div><span class="status-label">Grüner Haken</span><span class="status-desc">Live — Seite ist erreichbar</span></div>
+          <div class="status-item"><div class="status-dot dot-orange"></div><span class="status-label">Rot / X</span><span class="status-desc">Fehler — Commit-Inhalt prüfen</span></div>
+        </div>
+        <p>Typische Dauer: <strong>1–3 Minuten</strong>. Danach Seite im Browser aufrufen und hart neu laden.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 4. DATEI AKTUALISIEREN ══ -->
+  <div class="section" id="datei-aktualisieren">
+    <div class="section-title"><span class="num">4</span> Bestehende Datei aktualisieren</div>
+
+    <div class="step">
+      <div class="step-head orange">
+        <div class="step-num">1</div>
+        <div class="step-title">Alte Datei in Working Copy löschen</div>
+        <span class="step-where">Working Copy</span>
+      </div>
+      <div class="step-body">
+        <p>Datei lang drücken → <strong>Löschen</strong>. Erst dann neue Version importieren.</p>
+        <div class="warn"><strong>Nicht überschreiben</strong> — Working Copy erstellt sonst ein Duplikat mit <span class="path">-2</span> im Namen.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-head orange">
+        <div class="step-num">2</div>
+        <div class="step-title">Neue Version importieren</div>
+        <span class="step-where">Working Copy</span>
+      </div>
+      <div class="step-body">
+        <p><strong>+</strong> → <strong>Dateien importieren</strong> → aus OneDrive die aktualisierte Version wählen.</p>
+        <p>Die neue Version muss denselben Namen haben wie die alte — sonst findet das HTML sie nicht.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-head green">
+        <div class="step-num">3</div>
+        <div class="step-title">Commit & Push</div>
+        <span class="step-where">Working Copy</span>
+      </div>
+      <div class="step-body">
+        <p>Push-Toggle grün → Häkchen setzen → Commit-Nachricht → <strong>Commit</strong>.</p>
+        <div class="warn"><strong>Fast-Forward Fehler?</strong> Das passiert wenn GitHub einen neueren Stand hat als Working Copy (z.B. nach Änderungen über github.dev). Lösung: erst <strong>Pull</strong>, dann <strong>Push</strong>.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 5. BILDER ══ -->
+  <div class="section" id="bilder">
+    <div class="section-title"><span class="num">5</span> Bilder vorbereiten</div>
+
+    <div class="step">
+      <div class="step-head blue">
+        <div class="step-num">1</div>
+        <div class="step-title">Fotos aus Foto App in OneDrive speichern</div>
+        <span class="step-where">Foto App → OneDrive</span>
+      </div>
+      <div class="step-body">
+        <p>Foto antippen → Teilen → OneDrive → Zielordner <span class="path">github/projektname/img/</span> wählen.</p>
+        <p>In OneDrive hat man Thumbnail-Vorschau + Dateiname — ideal zum Zuordnen und Umbenennen.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-head blue">
+        <div class="step-num">2</div>
+        <div class="step-title">Dateien umbenennen</div>
+        <span class="step-where">OneDrive</span>
+      </div>
+      <div class="step-body">
+        <p>Drei-Punkte-Menü neben der Datei → <strong>Umbenennen</strong>.</p>
+        <div class="info">
+          <strong>Namenskonvention — immer einhalten:</strong><br>
+          ✓ <span class="path">san_vitale_justinian_detail.jpeg</span><br>
+          ✗ <span class="path">san-vitale-justinian-detail.jpeg</span> (Bindestrich → HTML findet Datei nicht)<br>
+          ✗ <span class="path">San Vitale Justinian.jpeg</span> (Leerzeichen → nie verwenden)<br>
+          ✗ <span class="path">galla_placidia_kreuzgewölbe.jpeg</span> (Umlaut → immer ausschreiben: <span class="path">oe</span>)
+        </div>
+        <p><strong>Schema:</strong> <span class="path">hauptort_beschreibung.jpeg</span> — Hauptort vorne für korrekte Sortierung im Repo.</p>
+        <p><strong>Endung:</strong> iPhone speichert als <span class="path">.jpeg</span> — HTML muss dieselbe Endung referenzieren. Claude liefert jetzt immer <span class="path">.jpeg</span>.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 6. STATUS ══ -->
+  <div class="section" id="status">
+    <div class="section-title"><span class="num">6</span> Status prüfen</div>
+
+    <p style="font-size:0.88rem;margin-bottom:1rem;color:var(--text-light);">Drei verschiedene Statusebenen — Working Copy, GitHub Actions, Browser.</p>
+
+    <div class="step">
+      <div class="step-head dark">
+        <div class="step-num">A</div>
+        <div class="step-title">Working Copy — lokaler Status</div>
+        <span class="step-where">Working Copy</span>
+      </div>
+      <div class="step-body">
+        <div class="status-row">
+          <div class="status-item"><div class="status-dot dot-green"></div><span class="status-label">Grün</span><span class="status-desc">Neu hinzugefügt, noch nicht committed</span></div>
+          <div class="status-item"><div class="status-dot dot-blue"></div><span class="status-label">Blau</span><span class="status-desc">Committed, aber noch nicht gepusht</span></div>
+          <div class="status-item"><div class="status-dot dot-grey"></div><span class="status-label">Grau</span><span class="status-desc">Committed und gepusht — synchron mit GitHub ✓</span></div>
+        </div>
+        <p>Grauer Status ohne Punkt beim Status-Ordner = alles synchron.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-head dark">
+        <div class="step-num">B</div>
+        <div class="step-title">GitHub Actions — Deployment Status</div>
+        <span class="step-where">github.com → Actions</span>
+      </div>
+      <div class="step-body">
+        <p><span class="path">github.com/maroldm/pages</span> → Tab <strong>Actions</strong> → oberster Eintrag "pages build and deployment":</p>
+        <div class="status-row">
+          <div class="status-item"><div class="status-dot dot-yellow"></div><span class="status-label">Gelber Kreis</span><span class="status-desc">In progress — noch nicht live, warten</span></div>
+          <div class="status-item"><div class="status-dot dot-green"></div><span class="status-label">Grüner Haken</span><span class="status-desc">Live — Seite erreichbar unter github.io</span></div>
+        </div>
+        <div class="tip"><strong>Das ist die zuverlässigste Antwort</strong> auf "ist es schon live?" — nicht raten, hier nachschauen.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-head dark">
+        <div class="step-num">C</div>
+        <div class="step-title">Browser — Seite wirklich aktuell?</div>
+        <span class="step-where">Edge / Safari</span>
+      </div>
+      <div class="step-body">
+        <p>Nach einem Push zeigt der Browser manchmal noch die alte Version aus dem Cache.</p>
+        <p><strong>Harten Reload erzwingen:</strong> In Edge lange auf das Neu-Laden-Symbol drücken → <strong>"Harten Neu-Laden erzwingen"</strong>.</p>
+        <div class="tip">Erst wenn GitHub Actions grünen Haken zeigt, hat ein harter Reload Sinn.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 7. QUELLTEXT ══ -->
+  <div class="section" id="quelltext">
+    <div class="section-title"><span class="num">7</span> Quelltext lesen — wo und wie</div>
+
+    <table class="where-table">
+      <thead>
+        <tr><th>Ziel</th><th>Werkzeug</th><th>Vorgehen</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Was liegt auf GitHub?</strong></td>
+          <td><span class="tool tool-gh">github.com</span></td>
+          <td>Repository → Ordner → Datei antippen → Quelltext mit Zeilennummern sichtbar. Dort nach Begriffen scrollen.</td>
+        </tr>
+        <tr>
+          <td><strong>Was liefert GitHub Pages aus?</strong></td>
+          <td><span class="tool tool-gh">github.com</span></td>
+          <td>Direkte Raw-URL aufrufen: <span class="path">raw.githubusercontent.com/maroldm/pages/main/pfad/datei.html</span> — zeigt exakt den ausgelieferten Inhalt.</td>
+        </tr>
+        <tr>
+          <td><strong>Was sieht der Browser?</strong></td>
+          <td>Edge / Safari</td>
+          <td><span class="path">view-source:</span> funktioniert in Edge auf iPhone nicht. Stattdessen: github.com → Datei direkt anschauen.</td>
+        </tr>
+        <tr>
+          <td><strong>Einzelne Zeile finden</strong></td>
+          <td><span class="tool tool-gh">github.com</span></td>
+          <td>Datei auf github.com öffnen → Drei-Punkte-Menü → <strong>"In place" bearbeiten</strong> → Strg+F funktioniert im Browser.</td>
+        </tr>
+        <tr>
+          <td><strong>Datei bearbeiten</strong></td>
+          <td><span class="tool tool-gh">github.dev</span></td>
+          <td>Auf github.com Datei öffnen → Drei-Punkte → <strong>github.dev</strong> → Vollständiger Editor. Rechtsklick auf Datei im Explorer → Umbenennen möglich.</td>
+        </tr>
+        <tr>
+          <td><strong>Einzelnes Bild prüfen</strong></td>
+          <td>Edge</td>
+          <td>Direkte URL aufrufen: <span class="path">maroldm.github.io/pages/2026_cesenatico/ravenna/img/dateiname.jpeg</span> — Bild erscheint oder 404.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="warn" style="margin-top:0.8rem;"><strong>github.dev vs. github.com:</strong> github.com zeigt Dateien read-only. github.dev (Punkt-Taste oder Drei-Punkte-Menü) öffnet den echten Editor mit Umbenennen, Verschieben per Rechtsklick, Commit & Push direkt im Browser.</div>
+  </div>
+
+  <!-- ══ 8. NOTFALL ══ -->
+  <div class="section" id="notfall">
+    <div class="section-title"><span class="num">8</span> Notfallplan</div>
+
+    <div class="step">
+      <div class="step-head orange">
+        <div class="step-num">!</div>
+        <div class="step-title">Fast-Forward Fehler beim Push</div>
+        <span class="step-where">Working Copy</span>
+      </div>
+      <div class="step-body">
+        <p><em>"Änderungen können nicht gepusht werden, da kein Fast-Forward möglich war."</em></p>
+        <p>Ursache: GitHub hat einen neueren Commit als Working Copy — z.B. nach Änderungen über github.dev oder github.com.</p>
+        <p><strong>Lösung:</strong> Fingerabdruck → <strong>Pull</strong> → danach <strong>Push</strong>. Pull holt den neueren Stand herunter, dann kann gepusht werden.</p>
+        <div class="tip"><strong>Pull macht nichts kaputt</strong> — es holt nur den Stand der bereits auf GitHub liegt.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-head orange">
+        <div class="step-num">!</div>
+        <div class="step-title">Bilder erscheinen nicht (Fragezeichen)</div>
+        <span class="step-where">Browser</span>
+      </div>
+      <div class="step-body">
+        <p>Checkliste in dieser Reihenfolge:</p>
+        <p><strong>1.</strong> Bild-URL direkt testen: <span class="path">maroldm.github.io/.../img/dateiname.jpeg</span> — 404 oder Bild?</p>
+        <p><strong>2.</strong> Falls 404: Datei überhaupt in Working Copy unter <span class="path">img/</span>? Dateiname exakt korrekt (Unterstrich, kein Bindestrich, kein Umlaut)?</p>
+        <p><strong>3.</strong> Falls Bild erscheint aber nicht im HTML: HTML auf github.com prüfen — steht dort <span class="path">.jpeg</span> oder <span class="path">.jpg</span>? Endungen müssen exakt übereinstimmen.</p>
+        <p><strong>4.</strong> GitHub Actions grünen Haken? Falls nicht — warten.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-head orange">
+        <div class="step-num">!</div>
+        <div class="step-title">Alter Link funktioniert nicht mehr</div>
+        <span class="step-where">github.dev</span>
+      </div>
+      <div class="step-body">
+        <p>Ursache: Datei oder Ordner wurde umbenannt oder verschoben.</p>
+        <div class="split-box">
+          <div class="split-row">
+            <div class="split-head iphone">📱 iPhone — github.dev</div>
+            <div class="split-head notebook">💻 Notebook — github.dev</div>
+          </div>
+          <div class="split-row">
+            <div class="split-cell">github.com → Datei → Drei-Punkte → <strong>github.dev</strong> → Datei im Explorer <strong>lang drücken</strong> → Umbenennen → neuen Pfad eingeben → Commit & Push.</div>
+            <div class="split-cell">github.com → Datei → Drei-Punkte → <strong>github.dev</strong> → Datei im Explorer <strong>rechtsklicken</strong> → Umbenennen oder per <strong>Drag & Drop</strong> in Zielordner ziehen → Commit & Push.</div>
+          </div>
+        </div>
+        <div class="warn"><strong>Nicht über github.com Datei-Editor</strong> versuchen — der <span class="path">../</span> Trick funktioniert dort nicht ("malformed path").</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 9. FALLSTRICKE ══ -->
+  <div class="section" id="fallstricke">
+    <div class="section-title"><span class="num">9</span> Bekannte Fallstricke</div>
+
+    <div class="warn"><strong>Bindestrich statt Unterstrich:</strong> <span class="path">galla-placidia-aussen.jpeg</span> vs. <span class="path">galla_placidia_aussen.jpeg</span> — HTML findet die Datei nicht. Immer Unterstrich.</div>
+
+    <div class="warn"><strong>Umlaute in Dateinamen:</strong> <span class="path">kreuzgewölbe.jpeg</span> → <span class="path">kreuzgewoelbe.jpeg</span>. Umlaute in Dateinamen vermeiden.</div>
+
+    <div class="warn"><strong>.jpg vs. .jpeg:</strong> iPhone speichert als <span class="path">.jpeg</span>. HTML muss dieselbe Endung haben. Claude liefert seit Juni 2026 immer <span class="path">.jpeg</span>.</div>
+
+    <div class="warn"><strong>Duplikate durch Import:</strong> Wenn eine Datei bereits existiert → Working Copy legt <span class="path">datei-2.html</span> an. Immer zuerst alte löschen, dann neue importieren.</div>
+
+    <div class="warn"><strong>Push-Toggle vergessen:</strong> Wenn Toggle grau ist, wird nur committed, nicht gepusht. Nichts ist live bis Push erfolgt.</div>
+
+    <div class="warn"><strong>Häkchen vergessen:</strong> Vor dem Commit müssen alle Dateien links angehakt sein — sonst werden nur einige committed.</div>
+
+    <div class="tip"><strong>Immer zuerst GitHub Actions prüfen</strong> bevor man annimmt, dass etwas live ist oder nicht.</div>
+
+    <div class="tip"><strong>OneDrive ist nur Zwischenlager</strong> — nach dem Import in Working Copy ist OneDrive irrelevant für GitHub.</div>
+  </div>
+
+
+  <!-- ══ 10. PROMPT-VORLAGE ══ -->
+  <div class="section" id="prompt">
+    <div class="section-title"><span class="num">10</span> Prompt-Vorlage — neuer Reiseführer</div>
+
+    <p style="font-size:0.86rem;color:var(--text-light);margin-bottom:1rem;">Dieser Prompt liefert zuverlässig eine fertige HTML im etablierten Stil — mit Bildnamen-Mapping und allen gelernten Konventionen. Den Textblock unten lang drücken → Alles auswählen → Kopieren.</p>
+
+    <div style="background:var(--deep);border-radius:10px;overflow:hidden;margin-bottom:1.2rem;">
+      <div style="padding:0.6rem 1rem;background:rgba(201,168,76,0.15);border-bottom:1px solid rgba(201,168,76,0.2);">
+        <span style="font-size:0.68rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold);">Prompt — zum Kopieren</span>
+      </div>
+      <div class="code-block" style="border-radius:0;margin:0;"><span class="comment">// Prompt für Claude — neuer Reiseführer</span>
+
+Ich möchte eine HTML-Reiseführer-Seite für [ORT] erstellen.
+
+<span class="highlight">Fotos:</span> Ich lade [N] Fotos hoch (iPhone-Namen IMG_xxxx).
+Bitte identifiziere jedes Foto und liste:
+- Vorgeschlagener Dateiname nach Schema:
+  ort_beschreibung.jpeg
+  (Unterstrich, kein Bindestrich, kein Umlaut, alles klein)
+- Kurze Inhaltsbeschreibung für Bildunterschrift
+
+<span class="highlight">HTML-Anforderungen:</span>
+- Dateiname: index.html (liegt in 2026_xxx/ort/)
+- Bilder in img/ relativ zur HTML
+- Kein Leaflet — SVG-Karte oder Google Maps Link
+- Hochformat-Fotos: object-position top
+- Querformat-Fotos: object-position center
+- Endung .jpeg (nicht .jpg)
+- Stil: Playfair Display / Source Sans 3,
+  dunkler Header, Stationskarten, Highlight-Boxen
+
+<span class="highlight">Stilprinzipien:</span>
+- Pars pro Toto: lieber wenige Orte wählen,
+  die stellvertretend die Geschichte der Stadt
+  erzählen — nicht alle Sehenswürdigkeiten abhaken
+- Geschichte an Personen festmachen:
+  Wer hat das gebaut, warum, was hat es ihn
+  gekostet, was ist danach passiert — keine
+  abstrakten Jahreszahlen ohne Kontext
+- Atmosphäre vor Fakten: was wirkt, was fühlt
+  sich an, wie ändert sich das Licht — bevor
+  erklärt wird was ein Ort ist
+- Für interessierte Laien lesbar, nicht für
+  Fachpublikum — aber keine Vereinfachung
+- Praktisches eingebettet: Öffnungszeiten,
+  Tickets, Hinweise direkt beim Ort
+
+<span class="highlight">Inhalt — Stationen:</span>
+[Stichpunkte: was gesehen, was aufgefallen,
+ eigene Beobachtungen vor Ort]</div>
+    </div>
+
+    <div class="tip"><strong>Bildnamen-Mapping:</strong> Claude listet alle Fotos mit vorgeschlagenem Dateinamen — so kann man IMG_xxxx direkt in OneDrive umbenennen ohne raten zu müssen.</div>
+
+    <div class="info" style="margin-top:0.7rem;"><strong>Dateiname immer index.html</strong> — das Verzeichnis ist der sprechende Name. <span class="path">2026_cesenatico/rimini/index.html</span> → erreichbar als <span class="path">maroldm.github.io/pages/2026_cesenatico/rimini/</span></div>
+
+    <div style="background:var(--deep);border-radius:8px;padding:1.2rem 1.4rem;margin-top:1rem;">
+      <p style="font-size:0.82rem;font-weight:700;color:var(--gold);margin-bottom:0.6rem;">Stilprinzip — Pars pro Toto</p>
+      <p style="font-size:0.82rem;color:rgba(248,243,234,0.78);line-height:1.7;margin-bottom:0.5rem;">Nicht alle Sehenswürdigkeiten einer Stadt abarbeiten — sondern gezielt auswählen: welche Orte erzählen stellvertretend die Geschichte dieser Stadt? Ein Triumphbogen erklärt das Imperium. Ein halbfertiger Tempel erklärt die Renaissance und einen Papststreit. Eine Mosaikkirche erklärt zwei Theologien und einen Epochenbruch.</p>
+      <p style="font-size:0.82rem;color:rgba(248,243,234,0.78);line-height:1.7;margin-bottom:0.5rem;"><strong style="color:var(--gold-light,#E8D5A3);">Geschichte an Personen festmachen:</strong> Galla Placidia als Geisel, Regentin, Bauherrin. Sigismondo Malatesta als Mäzen und exkommunizierter Heidenprovokateur. Theodora als Tochter eines Zirkuswärters auf dem Kaiserthron. Die Person trägt die Geschichte — nicht das Datum.</p>
+      <p style="font-size:0.82rem;color:rgba(248,243,234,0.78);line-height:1.7;margin-bottom:0;"><strong style="color:var(--gold-light,#E8D5A3);">Atmosphäre vor Fakten:</strong> Der Übergang vom grellen Tageslicht in die Halbdunkelheit von Galla Placidia. Das Flimmern der Goldtesserae bei Bewegung. Diese Sätze laden ein — die anderen informieren.</p>
+    </div>
+  </div>
+
+  <!-- ══ NÄCHSTE SCHRITTE RIMINI ══ -->
+  <div class="section" id="naechste-schritte">
+    <div class="section-title"><span class="num">→</span> Nächste Schritte — Rimini jetzt hochladen</div>
+
+    <div class="step">
+      <div class="step-head blue">
+        <div class="step-num">1</div>
+        <div class="step-title">Bilder umbenennen in OneDrive</div>
+        <span class="step-where">📱 OneDrive</span>
+      </div>
+      <div class="step-body">
+        <p>Die 6 Rimini-Fotos aus der Foto App in OneDrive speichern und umbenennen:</p>
+        <div class="code-block">IMG_3001 → rimini_augustusbogen.jpeg
+IMG_3003 → rimini_tempio_malatestiano_fassade.jpeg
+IMG_3004 → rimini_tempio_malatestiano_innen_elefant.jpeg
+IMG_3009 → rimini_piazza_cavour_brunnen.jpeg
+IMG_3010 → rimini_piazza_cavour_pescheria.jpeg
+IMG_3012 → rimini_ponte_tiberio_restaurierung.jpeg</div>
+        <p>Alle in einen Unterordner <span class="path">img/</span> legen. Die <span class="path">index.html</span> (Rimini) ebenfalls in OneDrive speichern.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-head blue">
+        <div class="step-num">2</div>
+        <div class="step-title">Ordner in Working Copy anlegen</div>
+        <span class="step-where">📱 Working Copy</span>
+      </div>
+      <div class="step-body">
+        <p>Repository <span class="path">pages</span> → <span class="path">2026_cesenatico</span> → <strong>+</strong> → <strong>Verzeichnis erstellen</strong> → <span class="path">rimini</span></p>
+        <p>In <span class="path">rimini</span> → <strong>+</strong> → <strong>Verzeichnis erstellen</strong> → <span class="path">img</span></p>
+        <div class="tip"><strong>Ob Working Copy einen ganzen Ordner auf einmal importieren kann</strong> ist noch nicht getestet. Sicherer Weg: erst Verzeichnisse manuell anlegen, dann Dateien importieren wie bei Ravenna.</div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-head blue">
+        <div class="step-num">3</div>
+        <div class="step-title">HTML und Bilder importieren</div>
+        <span class="step-where">📱 Working Copy</span>
+      </div>
+      <div class="step-body">
+        <p>In <span class="path">rimini</span>: <strong>+</strong> → <strong>Dateien importieren</strong> → OneDrive → <span class="path">index.html</span> auswählen</p>
+        <p>In <span class="path">rimini/img</span>: <strong>+</strong> → <strong>Dateien importieren</strong> → OneDrive → <span class="path">img/</span> Ordner → <strong>Alle auswählen</strong></p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-head green">
+        <div class="step-num">4</div>
+        <div class="step-title">Commit &amp; Push, dann prüfen</div>
+        <span class="step-where">📱 Working Copy → github.com → Browser</span>
+      </div>
+      <div class="step-body">
+        <p>Push-Toggle grün → alle Häkchen setzen → Commit-Nachricht <span class="path">Rimini 2026 initial</span> → <strong>Commit</strong></p>
+        <p>Danach: <span class="path">github.com/maroldm/pages</span> → <strong>Actions</strong> → grüner Haken abwarten</p>
+        <p>Seite aufrufen: <span class="path">maroldm.github.io/pages/2026_cesenatico/rimini/</span></p>
+        <p>Einzelbild testen falls etwas fehlt: <span class="path">.../rimini/img/rimini_augustusbogen.jpeg</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 10. AUSBLICK ══ -->
+  <div class="section" id="ausblick">
+    <div class="section-title"><span class="num">→</span> Ausblick — was noch optimiert werden kann <span class="wip">Work in Progress</span></div>
+
+    <div class="ausblick">
+      <h3>iPhone Shortcuts — geplante Verbesserungen</h3>
+      <p>Der aktuelle Workflow hat zwei manuelle Engpässe die sich mit <strong>iOS Shortcuts</strong> automatisieren lassen. Shortcuts ist Apples eingebaute Automatisierungsapp — app-übergreifend, kein Code, visuelle Bausteine.</p>
+
+      <p><strong>Geplant 1 — Bilder komprimieren und umbenennen:</strong><br>
+      Aktuell: Fotos sind 3–8 MB groß (iPhone Originalauflösung), Ladezeit der Webseite spürbar. Ziel: Shortcut der ein oder mehrere Fotos nimmt, auf einen definierten Prozentsatz der Originalgröße reduziert (kein fixer Wert, sondern relativ), nach Eingabe eines Namens umbenennt, und direkt in OneDrive speichert — alles in einem Tap.</p>
+
+      <p><strong>Geplant 2 — Dateiname vergeben:</strong><br>
+      Aktuell: Umbenennen in OneDrive per Hand, Thumbnail-Zuordnung manchmal fehleranfällig. Ziel: Shortcut fragt beim Speichern direkt nach dem Zielnamen — kein nachträgliches Umbenennen mehr nötig.</p>
+
+      <p><strong>Offen / noch nicht durchdacht:</strong><br>
+      Working Copy hat eine Shortcuts-Integration — theoretisch könnte auch Commit und Push in einen Shortcut eingebaut werden. Ob das den Aufwand lohnt und wie es mit der Mehrfachauswahl von Dateien zusammenspielt, ist noch nicht evaluiert.</p>
+
+      <p style="color:rgba(248,243,234,0.45);font-size:0.78rem;margin-top:0.8rem;">Dieser Abschnitt wird ergänzt sobald die Shortcuts erarbeitet und getestet sind.</p>
+    </div>
+  </div>
+
+
+</main>
+
+<footer>
+  Workflow Guide · Stand Juni 2026 · Erarbeitet aus echten Fehlern · maroldm/pages · workflow_reisefuehrer.html
+</footer>
+
+</body>
+</html>
