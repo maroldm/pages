@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BW Radeln – Schliersee 2.–5. Juli 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@300;400;600&display=swap');
+
+  :root {
+    --wald:   #2d4a2d;
+    --alm:    #5a8a3c;
+    --holz:   #c8956a;
+    --schnee: #f5f2eb;
+    --fels:   #3a3530;
+    --gold:   #d4a53a;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--schnee);
+    color: var(--fels);
+    font-weight: 300;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+  .hero-img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(20,35,20,0.92) 0%, rgba(20,35,20,0.3) 60%, transparent 100%);
+  }
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: 3rem 1.5rem 4rem;
+    max-width: 700px;
+  }
+  .hero-eyebrow {
+    font-size: 0.7rem; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 8vw, 5rem);
+    font-weight: 900; line-height: 1.0;
+    color: var(--schnee); margin-bottom: 1.2rem;
+  }
+  .hero h1 span { color: var(--gold); display: block; }
+  .hero-sub {
+    font-size: 1.05rem; color: rgba(245,242,235,0.8);
+    line-height: 1.6; max-width: 480px;
+  }
+  .hero-date {
+    margin-top: 2rem;
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(212,165,58,0.4);
+    padding: 0.6rem 1.2rem; border-radius: 2px;
+    font-size: 0.9rem; color: var(--gold);
+    font-weight: 600; letter-spacing: 0.05em;
+  }
+
+  .divider {
+    height: 4px;
+    background: linear-gradient(90deg, var(--alm), var(--gold), var(--holz));
+  }
+
+  section {
+    padding: 3.5rem 1.5rem;
+    max-width: 780px; margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 0.7rem; font-weight: 600;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--alm); margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5vw, 2.4rem);
+    font-weight: 700; color: var(--wald);
+    line-height: 1.15; margin-bottom: 1.5rem;
+  }
+
+  p { font-size: 1rem; line-height: 1.75; color: #4a4540; margin-bottom: 1rem; }
+
+  /* CARD */
+  .card {
+    background: white; border-radius: 3px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(45,74,45,0.08);
+    margin-bottom: 2rem;
+  }
+  .card-img-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 3px;
+  }
+  .card-img-row img, .card img.single {
+    width: 100%; display: block;
+    object-fit: cover;
+  }
+  .card-img-row img { height: 180px; }
+  .card img.single { height: 240px; }
+  .card img.wide { width: 100%; height: 200px; object-fit: cover; display: block; }
+  .card img.banner { width: 100%; max-height: 120px; object-fit: cover; display: block; }
+  .card-body { padding: 1.25rem 1.5rem; }
+  .card-tag {
+    font-size: 0.7rem; font-weight: 600;
+    letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--alm); margin-bottom: 0.4rem;
+  }
+  .card-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; color: var(--wald); margin-bottom: 0.6rem;
+  }
+  .card-body ul { padding-left: 1.2rem; margin-bottom: 0.75rem; }
+  .card-body ul li { font-size: 0.95rem; line-height: 1.6; color: #4a4540; }
+  .card-link {
+    display: inline-block; margin-top: 0.5rem;
+    font-size: 0.85rem; font-weight: 600; color: var(--alm);
+    text-decoration: none; border-bottom: 1px solid var(--alm); padding-bottom: 1px;
+  }
+  .card-price {
+    display: inline-block;
+    background: var(--schnee); border: 1px solid var(--holz);
+    color: var(--fels); font-size: 0.8rem; font-weight: 600;
+    padding: 0.25rem 0.6rem; border-radius: 2px; margin-top: 0.5rem;
+  }
+
+  /* KOSTEN */
+  .kosten-box {
+    background: var(--wald); color: var(--schnee);
+    padding: 2rem; border-radius: 3px; margin: 1.5rem 0;
+  }
+  .kosten-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem; color: var(--gold); margin-bottom: 1rem;
+  }
+  .kosten-row {
+    display: flex; justify-content: space-between;
+    align-items: baseline; padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    font-size: 0.95rem;
+  }
+  .kosten-row:last-child { border-bottom: none; }
+  .kosten-total { font-weight: 600; color: var(--gold); }
+  .iban-box {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(212,165,58,0.3);
+    padding: 1rem 1.2rem; margin-top: 1rem; border-radius: 2px;
+    font-size: 0.88rem; line-height: 1.7;
+  }
+  .iban-box strong {
+    display: block; color: var(--gold);
+    font-size: 0.7rem; letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 0.3rem;
+  }
+
+  /* TOUREN */
+  .tour-item {
+    padding: 1.25rem 0;
+    border-bottom: 1px solid rgba(45,74,45,0.12);
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+  .tour-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .tour-item h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; color: var(--wald); margin-bottom: 0.3rem;
+  }
+  .tour-item p { font-size: 0.9rem; margin-bottom: 0; color: #5a5550; }
+  .tour-map {
+    display: block;
+    border-radius: 3px;
+    margin-top: 0.75rem;
+    max-width: 360px;
+    width: 100%;
+    height: auto;
+  }
+
+  .hinweis {
+    background: #fff8e8; border-left: 4px solid var(--gold);
+    padding: 1rem 1.25rem; margin: 1.5rem 0;
+    font-size: 0.9rem; color: #5a4a20;
+  }
+
+  .facts-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 0.75rem; margin: 1.5rem 0;
+  }
+  .fact {
+    background: white; border-left: 3px solid var(--alm);
+    padding: 0.75rem 1rem;
+  }
+  .fact-label {
+    font-size: 0.7rem; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--alm); font-weight: 600;
+  }
+  .fact-value { font-size: 1rem; font-weight: 600; color: var(--fels); margin-top: 0.15rem; }
+
+  footer {
+    background: var(--fels); color: rgba(245,242,235,0.6);
+    text-align: center; padding: 2rem 1.5rem; font-size: 0.85rem;
+  }
+  footer strong { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<!-- HERO mit FeWo-Bild -->
+<div class="hero">
+  <img class="hero-img" src="img/fewo.png" alt="Ferienwohnung Neuhaus am Schliersee">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Freunde des russischen Farbfernsehens</div>
+    <h1>BW Radeln<span>am Schliersee</span></h1>
+    <p class="hero-sub">Schliersee, Fischbachau, Bayrischzell – drei Tage, fünf Freunde, eine Brennerei, ein Gipfel und viel zu viel Kuchen.</p>
+    <div class="hero-date">📅 &nbsp;2. – 5. Juli 2026 · Neuhaus am Schliersee</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- HOFHAUS -->
+<section>
+  <div class="section-label">Donnerstag Abend · Ankunft</div>
+  <h2>Hofhaus am Schliersee</h2>
+  <div class="card">
+    <img class="banner" src="img/hofhaus-banner.png" alt="Hofhaus am See">
+    <img class="wide" src="img/hofhaus-garten.png" alt="Biergarten Hofhaus">
+    <div class="card-body">
+      <p>Am Donnerstag Abend im Hofhaus am See die ideale Einkehr nach der Anreise. Klein aber fein und urgemütlich. Prima Essen.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SLYRS -->
+<section>
+  <div class="section-label">Freitag</div>
+  <h2>🥃 SLYRS Whisky-Brennerei</h2>
+  <div class="card">
+    <div class="card-img-row">
+      <img src="img/slyrs-aussen.png" alt="SLYRS Destillerie von außen">
+      <img src="img/slyrs-brennblasen.png" alt="Kupfer-Brennblasen">
+    </div>
+    <div class="card-img-row">
+      <img src="img/slyrs-innen.png" alt="SLYRS Innenraum">
+      <img src="img/slyrs-fasslager.png" alt="SLYRS Fasslager">
+    </div>
+    <div class="card-body">
+      <div class="card-tag">Nur 3 Gehminuten vom Quartier</div>
+      <h3>Erlebniswelt & Genussverweilerei</h3>
+      <ul>
+        <li>Slyrs Erlebniswelt mit oder ohne Führung</li>
+        <li>Vorher Grundlage schaffen in der Genussverweilerei</li>
+      </ul>
+      <img src="img/slyrs-genussverweilerei.png" alt="Genussverweilerei Terrasse" style="width:100%;border-radius:2px;margin-top:0.5rem;">
+      <a class="card-link" href="https://slyrs.com/erlebniswelt/" target="_blank">→ slyrs.com</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WENDELSTEIN -->
+<section>
+  <div class="section-label">Samstag · Highlight</div>
+  <h2>🏔️ Wendelstein</h2>
+  <div class="card">
+    <div class="card-img-row">
+      <img src="img/wendelstein-seilbahn.png" alt="Wendelstein Seilbahn">
+      <img src="img/wendelstein-gipfel.png" alt="Wendelstein Gipfel">
+    </div>
+    <img class="wide" src="img/wendelstein-panorama.png" alt="Wendelstein Bergstation Panorama">
+    <div class="card-body">
+      <p>Per Seilbahn in 7 Minuten auf 1.724 m – mit bis zu 170 m Bodenabstand der absolute WOW-Moment. Deutschlands höchstgelegene Schauhöhle, Panoramaweg, Wendelsteinhaus.</p>
+      <span class="card-price">Berg & Tal: 31 € / Person</span>
+      <a class="card-link" href="https://www.wendelsteinbahn.de" target="_blank" style="display:block;margin-top:0.75rem">→ wendelsteinbahn.de</a>
+    </div>
+  </div>
+
+  <!-- Sonntagsbrunch -->
+  <div class="card">
+    <img class="wide" src="img/wendelstein-brunch.png" alt="Sonntagsbrunch am Wendelstein">
+    <div class="card-body">
+      <div class="card-tag">Sonntag · Abreisetag</div>
+      <h3>☀️ Sonntagsbrunch auf 1.724 m</h3>
+      <p>Brunchbuffet mit allem was dazugehört: Brotwaren, Wurst, Käse, Antipasti, warmer Hauptgang, Suppe, Dessert, Kaffee. Nächster Termin: <strong>5. Juli</strong>.</p>
+      <p>Bergfahrt: 9:30 Uhr Zahnradbahn / 9:45 Uhr Seilbahn.</p>
+      <span class="card-price">89 € inkl. Berg- und Talfahrt</span>
+    </div>
+  </div>
+
+  <!-- Kombi -->
+  <div class="card">
+    <div class="card-body">
+      <div class="card-tag">Alternative</div>
+      <h3>🏔️🥃 SLYRS + Wendelstein Kombiticket</h3>
+      <p>Seilbahn rauf, SLYRS-Fässer in der Wendelsteinhöhle besichtigen, dann Destillerie unten. Zwei Erlebnisse, ein Preis – ca. 10% günstiger als Einzeltickets.</p>
+      <span class="card-price">Kombiticket: 39 € / Person</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WINKLSTÜBERL -->
+<section>
+  <div class="section-label">Radeltour-Ziel</div>
+  <h2>🍰 Café Winklstüberl</h2>
+  <div class="card">
+    <div class="card-img-row">
+      <img src="img/winklstueberl-theke.png" alt="Winklstüberl Kuchentheke">
+      <img src="img/winklstueberl-garten.png" alt="Winklstüberl Außen">
+    </div>
+    <img class="wide" src="img/winklstueberl-kuchen.png" alt="Kuchen und Kaffee im Winklstüberl">
+    <div class="card-body">
+      <img src="img/winklstueberl-keks.png" alt="Kuchenstücke unter 300g sind Kekse" style="width:100%;border-radius:2px;margin-bottom:0.75rem;">
+      <ul>
+        <li>45 Minuten Radeln vom Quartier in Neuhaus</li>
+        <li>Legendär für superleckere, riesige Stücke Kuchen und Torten</li>
+      </ul>
+      <a class="card-link" href="https://www.winklstueberl.de" target="_blank">→ winklstueberl.de</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TOUREN -->
+<section>
+  <div class="section-label">Auf dem Sattel</div>
+  <h2>Tourenvorschläge</h2>
+
+  <div class="tour-item">
+    <div class="tour-icon">🚴</div>
+    <div>
+      <h4>Radltour um den Schliersberg</h4>
+      <p>Einkehr im Wirtshaus Kirchstiegl in Hundham und/oder im Café Winklstüberl in Fischbachau. 39 km, 340 hm, ca. 3:15 h.</p>
+      <img src="img/tour-schliersberg.png" alt="Route Schliersberg Rundtour" class="tour-map">
+    </div>
+  </div>
+
+  <div class="tour-item">
+    <div class="tour-icon">🚵</div>
+    <div>
+      <h4>Neuhaus → Ursprungpass → Mariandlalm</h4>
+      <p>23 km, ca. 1,5 h bis zum Trockenbachtal, dann zu Fuß zur Alm (1 h). Oben: Kaiserschmarrn, Marillenschnapserl vom Wirt und – wenn Glück – Mankeis (bair. Murmeltiere).</p>
+      <img src="img/mariandlalm-schild.png" alt="Mariandl'Alm" class="tour-map">
+      <img src="img/mariandlalm-aussen.png" alt="Mariandlalm" class="tour-map">
+      <img src="img/tour-mariandlalm.png" alt="Bergfex Route Mariandlalm" class="tour-map">
+    </div>
+  </div>
+
+  <div class="tour-item">
+    <div class="tour-icon">🥾</div>
+    <div>
+      <h4>Bergwanderung Schliersee → Gindelmoosalm → Neureuth</h4>
+      <p>Überquerung Schliersee–Tegernsee. Am Ziel Berggasthof Neureuth mit Blick über den Tegernsee. Hin und zurück ca. 4,5 h zu Fuß.</p>
+      <img src="img/tour-neureuth.png" alt="Bergfex Route Neureuth" class="tour-map">
+    </div>
+  </div>
+
+  <div class="tour-item">
+    <div class="tour-icon">🚣</div>
+    <div>
+      <h4>SUP oder Kajak auf dem Schliersee</h4>
+      <p>Es ist Sommer ☀️😎 – Verleihstation am Südufer. Nach einem Weißbier aufs Wasser.</p>
+    </div>
+  </div>
+
+  <div class="hinweis">
+    ⚠️ <strong>Anreise zur Seilbahn:</strong> Ortsdurchfahrt Fischbachau bis vsl. 3.7.26 gesperrt – Umleitung über Schliersee einplanen.
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- UNTERKUNFT -->
+<section>
+  <div class="section-label">Unser Basislager</div>
+  <h2>🏡 Ferienwohnung Neuhaus</h2>
+
+  <div class="facts-grid">
+    <div class="fact"><div class="fact-label">Größe</div><div class="fact-value">140 m²</div></div>
+    <div class="fact"><div class="fact-label">Personen</div><div class="fact-value">5</div></div>
+    <div class="fact"><div class="fact-label">Schlafzimmer</div><div class="fact-value">3 + 3 Bäder</div></div>
+    <div class="fact"><div class="fact-label">Extras</div><div class="fact-value">Sauna, Garten</div></div>
+    <div class="fact"><div class="fact-label">Check-in</div><div class="fact-value">ab 15:00 Uhr</div></div>
+    <div class="fact"><div class="fact-label">Check-out</div><div class="fact-value">bis 10:00 Uhr</div></div>
+  </div>
+
+  <p>Neuhaus, direkt am Südufer, fußläufig zum See, 3 Gehminuten zur Whisky-Brennerei. Bergblick, Sauna, Balkon. <strong>Stornierbar bis 18. Juni.</strong></p>
+  <a class="card-link" href="https://www.fewo-direkt.de/ferienwohnung-ferienhaus/p5756399?dateless=true" target="_blank">→ Inserat auf FeWo-direkt</a>
+
+  <div class="kosten-box" style="margin-top:2rem;">
+    <h3>💰 Kostenaufteilung</h3>
+    <div class="kosten-row"><span>Unterkunft (3 Nächte)</span><span>1.050,00 €</span></div>
+    <div class="kosten-row"><span>Mobilgeräte-Rabatt</span><span>–52,50 €</span></div>
+    <div class="kosten-row"><span>Zusatzgäste + Service</span><span>+226,13 €</span></div>
+    <div class="kosten-row"><span>Reiseschutz</span><span>67,78 €</span></div>
+    <div class="kosten-row kosten-total"><span>Gesamt</span><span>1.321,41 €</span></div>
+    <div class="kosten-row"><span>Pro Person (÷ 5)</span><span class="kosten-total">244,72 €</span></div>
+    <div class="iban-box">
+      <strong>Rate 1 – sofort fällig</strong>
+      83,85 € pro Person<br><br>
+      <strong>Rate 2 – fällig 25.06.2026</strong>
+      160,87 € pro Person<br><br>
+      <strong>Überweisung an Marold & Margit Moosrainer</strong>
+      IBAN: DE45 7025 0150 0000 7676 73<br>
+      BIC: BYLADEM1KMS · Kreissparkasse München Starnberg Ebersberg
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<footer>
+  <strong>BW Radeln · Schliersee 2026</strong><br>
+  Fragen, Änderungen, Panikattacken: Marold koordiniert.
+</footer>
+
+</body>
+</html>
