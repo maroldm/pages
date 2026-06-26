@@ -289,26 +289,6 @@
     /* ── MAP LINK ── */
     .map-section { margin-bottom: 2rem; }
 
-    .map-link {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      background: #fff;
-      border: 1px solid #ddd8cf;
-      border-radius: 6px;
-      padding: 1rem 1.2rem;
-      text-decoration: none;
-      color: var(--text);
-      font-size: 0.95rem;
-      transition: border-color 0.15s;
-    }
-
-    .map-link:hover { border-color: var(--gold); }
-
-    .map-link-icon { font-size: 1.5rem; }
-
-    .map-link-label { font-weight: 600; color: var(--stone); }
-    .map-link-sub { font-size: 0.83rem; color: var(--muted); }
 
     /* ── SVG MAP ── */
     .svg-map-wrap {
@@ -366,7 +346,22 @@
       in alle Winde zerstreut – umso schöner, dass wir uns wiedersehen.
       Und dass einige unserer Eltern auch dabei sein werden. 🤍
     </p>
-    <p class="letter-sign">Wir freuen uns auf euch!<br>Marold, Gitti und 2× Barbara</p>
+    <p class="letter-sign">Wir freuen uns auf euch!</p>
+    <div style="margin-top:1.2rem; display:inline-block; background:#000; border-radius:6px; padding:0.8rem 1.4rem; text-align:center; font-style:normal;">
+      <div style="font-family:'Source Sans 3',sans-serif; font-size:0.72rem; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:#aaa; margin-bottom:0.3rem;">Die drei</div>
+      <div style="font-family:'Source Sans 3',sans-serif; font-size:2rem; font-weight:900; line-height:1; letter-spacing:0.05em;">
+        <span style="color:#ffffff;">?</span><span style="color:#cc0000;">?</span><span style="color:#3399cc;">?</span>
+      </div>
+      <div style="margin-top:0.6rem; border-top:1px solid #333; padding-top:0.6rem; font-size:1.6rem; font-weight:900; letter-spacing:0.08em;">
+        <span style="color:#ffffff;">B</span><span style="color:#cc0000;">B</span><span style="color:#3399cc;">B</span>
+      </div>
+      <div style="margin-top:0.5rem; font-size:0.78rem; color:#888; letter-spacing:0.15em;">
+        &amp;&nbsp;<span style="color:#ffffff;">M</span><span style="color:#cc0000;">M</span>
+      </div>
+    </div>
+    <p style="margin-top:0.7rem; font-size:0.82rem; color:var(--muted); font-style:normal; line-height:1.8;">
+      Barbara Kapfhammer-Murr · Barbara Rösch-Rupp-Rupp-Rupp<br>Brigitte Hermann (geb. Ulrich) · Marold Moosrainer
+    </p>
   </div>
 
   <!-- PROGRAMM -->
@@ -376,7 +371,7 @@
 
     <div class="tl-item">
       <div class="tl-line"></div>
-      <span class="tl-time">ab 10:00</span>
+      <span class="tl-time">ab 10:30</span>
       <div class="tl-body">
         <p class="tl-label"><span class="tl-icon">☀️</span>Ankommen &amp; Ratschen</p>
         <p class="tl-desc">Treffen vor der Kirche – Wiedersehen, Reden, die Luft genießen.</p>
@@ -391,7 +386,7 @@
         <p class="tl-desc">
           In der romanischen Basilika St. Peter und Paul auf dem Petersberg –
           <a href="https://www.der-petersberg.de/basilika/geschichte" target="_blank" rel="noopener" style="color:var(--rust);">einer der ältesten Sakralbauten Altbayerns</a>,
-          erbaut 1104 von Benediktinermönchen.
+          erbaut 1104 von Benediktinermönchen. (Das wisst ihr natürlich längst. 😉)
         </p>
       </div>
     </div>
@@ -410,7 +405,9 @@
       <span class="tl-time">12:45</span>
       <div class="tl-body">
         <p class="tl-label"><span class="tl-icon">🍽️</span>Mittagessen im Gasthaus Freudenhaus</p>
-        <p class="tl-desc">Kleinberghofen – Tisch reserviert ab 12:45 Uhr. Wer läuft, kommt ein bisschen später nach.</p>
+        <p class="tl-desc">Kleinberghofen – Tisch reserviert ab 12:45 Uhr.<br>
+        <span style="font-size:0.88em; color:var(--muted);">Das Wirtshaus gibt es seit 1820 — und Ludwig Thoma war als Rechtsanwalt in Dachau Stammgast. Bis heute erinnert ein Nebenzimmer an ihn.</span></p>
+        <img src="img/freudenhaus.jpg" alt="Gasthaus Freudenhaus Kleinberghofen" style="margin-top:0.6rem; width:100%; max-width:260px; height:160px; object-fit:cover; object-position:center; border-radius:5px; display:block;">
       </div>
     </div>
 
@@ -439,46 +436,60 @@
 
     <!-- Schematische SVG-Karte -->
     <div class="svg-map-wrap">
-      <svg viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;font-family:'Source Sans 3',sans-serif;">
+      <svg viewBox="0 0 500 260" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;font-family:'Source Sans 3',sans-serif;">
         <!-- Hintergrund -->
-        <rect width="500" height="220" fill="#f0ece5"/>
+        <rect width="500" height="260" fill="#f0ece5"/>
 
-        <!-- Hügelform Petersberg -->
-        <ellipse cx="130" cy="100" rx="70" ry="45" fill="#d8d0c0" opacity="0.6"/>
-        <ellipse cx="130" cy="95" rx="50" ry="32" fill="#ccc4b0" opacity="0.5"/>
+        <!-- Nordpfeil -->
+        <g transform="translate(460,30)">
+          <circle cx="0" cy="0" r="16" fill="white" stroke="#ddd8cf" stroke-width="1"/>
+          <polygon points="0,-10 4,4 0,1 -4,4" fill="#2c2825"/>
+          <text x="0" y="22" font-size="9" text-anchor="middle" fill="#2c2825" font-weight="600">N</text>
+        </g>
 
-        <!-- Weg -->
-        <path d="M130,105 C180,110 260,120 340,130" stroke="#8b4a2f" stroke-width="3" fill="none" stroke-dasharray="7,4" stroke-linecap="round"/>
+        <!-- Hügelform Petersberg (Südosten = unten rechts) -->
+        <ellipse cx="370" cy="185" rx="65" ry="42" fill="#d8d0c0" opacity="0.6"/>
+        <ellipse cx="370" cy="180" rx="46" ry="30" fill="#ccc4b0" opacity="0.5"/>
 
-        <!-- Fußgänger-Icon -->
-        <text x="225" y="115" font-size="13" text-anchor="middle" fill="#8b4a2f">🥾</text>
-        <text x="225" y="130" font-size="9" text-anchor="middle" fill="#8b4a2f" font-weight="600">~2,5 km · 45 Min.</text>
+        <!-- Bahnlinie (von SO nach NW, gestrichelt grau) -->
+        <line x1="400" y1="210" x2="100" y2="80" stroke="#888" stroke-width="2.5" stroke-dasharray="10,5"/>
+        <!-- Bahnschwellen-Ticks -->
+        <line x1="388" y1="195" x2="382" y2="206" stroke="#888" stroke-width="1.5"/>
+        <line x1="363" y1="178" x2="357" y2="189" stroke="#888" stroke-width="1.5"/>
+        <line x1="338" y1="161" x2="332" y2="172" stroke="#888" stroke-width="1.5"/>
+        <line x1="313" y1="144" x2="307" y2="155" stroke="#888" stroke-width="1.5"/>
+        <line x1="288" y1="127" x2="282" y2="138" stroke="#888" stroke-width="1.5"/>
+        <line x1="263" y1="110" x2="257" y2="121" stroke="#888" stroke-width="1.5"/>
+        <line x1="238" y1="93" x2="232" y2="104" stroke="#888" stroke-width="1.5"/>
+        <line x1="213" y1="76" x2="207" y2="87" stroke="#888" stroke-width="1.5"/>
+        <line x1="188" y1="59" x2="182" y2="70" stroke="#888" stroke-width="1.5"/>
+        <!-- Bahnlabel -->
+        <text x="260" y="162" font-size="8.5" fill="#888" transform="rotate(-27,260,162)">S2 Dachau – Altomünster</text>
 
-        <!-- Petersberg Marker -->
-        <circle cx="130" cy="85" r="14" fill="#2c2825"/>
-        <text x="130" y="90" font-size="13" text-anchor="middle" fill="white">⛪</text>
-        <text x="130" y="142" font-size="11" text-anchor="middle" fill="#2c2825" font-weight="600">Petersberg</text>
-        <text x="130" y="156" font-size="9.5" text-anchor="middle" fill="#7a6f65">Basilika · Gottesdienst</text>
-        <text x="130" y="168" font-size="9.5" text-anchor="middle" fill="#7a6f65">ab 10:00 Uhr</text>
+        <!-- Fußweg entlang der Bahn (gestrichelt rostrot, leicht versetzt) -->
+        <path d="M375,170 C330,148 270,118 145,65" stroke="#8b4a2f" stroke-width="2.5" fill="none" stroke-dasharray="7,4" stroke-linecap="round"/>
 
-        <!-- Kleinberghofen Marker -->
-        <circle cx="340" cy="125" r="14" fill="#c9973a"/>
-        <text x="340" y="130" font-size="13" text-anchor="middle" fill="white">🍽️</text>
-        <text x="340" y="155" font-size="11" text-anchor="middle" fill="#2c2825" font-weight="600">Kleinberghofen</text>
-        <text x="340" y="168" font-size="9.5" text-anchor="middle" fill="#7a6f65">Gasthaus Freudenhaus</text>
-        <text x="340" y="180" font-size="9.5" text-anchor="middle" fill="#7a6f65">+ Pfarrheim</text>
+        <!-- Fußgänger-Label Mitte -->
+        <text x="272" y="100" font-size="12" text-anchor="middle" fill="#8b4a2f" transform="rotate(-27,272,100)">🥾</text>
+        <text x="295" y="122" font-size="8.5" text-anchor="middle" fill="#8b4a2f" font-weight="600" transform="rotate(-27,295,122)">~2,5 km · ~45 Min.</text>
+
+        <!-- Petersberg Marker (Südosten, unten rechts) -->
+        <circle cx="375" cy="165" r="15" fill="#2c2825"/>
+        <text x="375" y="170" font-size="13" text-anchor="middle" fill="white">⛪</text>
+        <text x="375" y="210" font-size="11" text-anchor="middle" fill="#2c2825" font-weight="600">Petersberg</text>
+        <text x="375" y="223" font-size="9" text-anchor="middle" fill="#7a6f65">Basilika · Gottesdienst</text>
+        <text x="375" y="235" font-size="9" text-anchor="middle" fill="#7a6f65">ab 11:00 Uhr</text>
+
+        <!-- Kleinberghofen Marker (Nordwesten, oben links) -->
+        <circle cx="130" cy="55" r="15" fill="#c9973a"/>
+        <text x="130" y="60" font-size="13" text-anchor="middle" fill="white">🍽️</text>
+        <text x="148" y="82" font-size="11" text-anchor="start" fill="#2c2825" font-weight="600">Kleinberghofen</text>
+        <text x="148" y="95" font-size="9" text-anchor="start" fill="#7a6f65">Gasthaus Freudenhaus</text>
+        <text x="148" y="107" font-size="9" text-anchor="start" fill="#7a6f65">+ Pfarrheim</text>
       </svg>
     </div>
 
-    <!-- Google Maps Link -->
-    <a class="map-link" href="https://www.google.com/maps/dir/Petersberg+Basilika+Erdweg/Gasthaus+Freudenhaus+Kleinberghofen" target="_blank" rel="noopener">
-      <span class="map-link-icon">🗺️</span>
-      <div>
-        <div class="map-link-label">Route in Google Maps öffnen</div>
-        <div class="map-link-sub">Petersberg Basilika → Gasthaus Freudenhaus Kleinberghofen</div>
-      </div>
-      <span style="margin-left:auto; color:var(--muted); font-size:1.1rem;">↗</span>
-    </a>
+
   </div>
 
   <!-- ANMELDUNG -->
@@ -494,8 +505,8 @@
 
   <!-- FOTOS -->
   <div class="fotos-hint">
-    📸 <strong>Alte Fotos aus früheren Treffen?</strong><br>
-    Barbara Kapfhammer-Murr freut sich über digitale Zusendungen vorab an
+    📸 <strong>Fotos von früher?</strong><br>
+    Einfach einscannen und vorab an Barbara schicken:
     <a href="mailto:bkmurr@t-online.de">bkmurr@t-online.de</a>
   </div>
 
